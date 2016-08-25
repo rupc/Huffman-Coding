@@ -13,30 +13,30 @@
 using namespace std;
 string getBitString(unsigned char c);
 int getFileSize(ifstream &in);
-class huff_node {
+class hufNode {
     public:
         char symbol;
         int freq;
-        huff_node *left;
-        huff_node *right;
-        huff_node() {}
-        huff_node(const huff_node& hn) {
+        hufNode *left;
+        hufNode *right;
+        hufNode() {}
+        hufNode(const hufNode& hn) {
             symbol = hn.symbol;
             freq = hn.freq;
             left = hn.left; right = hn.right;
         }
-        huff_node(char s, int f) : symbol(s), freq(f) {
+        hufNode(char s, int f) : symbol(s), freq(f) {
             left = right = nullptr;
         }
-        huff_node(int f, huff_node *l, huff_node *r) {
+        hufNode(int f, hufNode *l, hufNode *r) {
             freq = f;
             left = l; right = r;
         }
 };
-huff_node root;
-void HuffmanCompress(char []);
-void HuffmanDecompress(char []);
-bool operator < (const huff_node &hc1, const huff_node &hc2) {
+hufNode root;
+void huffman_compress(char []);
+void huffman_decompress(char []);
+bool operator < (const hufNode &hc1, const hufNode &hc2) {
     return hc1.freq > hc2.freq;
 }
 void what_to_process(int argc, char *argv[]) {
@@ -44,10 +44,10 @@ void what_to_process(int argc, char *argv[]) {
     while((opt = getopt(argc, argv, "c:d:")) != -1) {
         switch(opt) {
             case 'c':
-                HuffmanCompress(optarg);
+                huffman_compress(optarg);
                 break;
             case 'd':
-                HuffmanDecompress(optarg);
+                huffman_decompress(optarg);
                 break;
             default:
                 cerr << "No matched option exist." << endl;
@@ -55,7 +55,7 @@ void what_to_process(int argc, char *argv[]) {
         }
     }
 }
-void PrintCompressionInfo(unsigned int cTotal, map<unsigned char, unsigned int> &ch_freq, unsigned int byteCount) {
+void print_compress_info(unsigned int cTotal, map<unsigned char, unsigned int> &ch_freq, unsigned int byteCount) {
     cout << "\n*************** Huffman Compression Information(START) ***************" << endl;
     cout << "Befor Compression\t:\t" << cTotal << endl;
     cout << "After Compression\t:\t" << byteCount << endl;
@@ -76,23 +76,23 @@ int PrintSymbolEncoding(map<unsigned char, string> &ch_str) {
     cout << "*************** Huffman Symbol Encoding(END) ***************" << endl;
     return lineno;
 }
-huff_node& BuildHuffmanTree(map<unsigned char, unsigned int> &HMT, priority_queue<huff_node> &PQ, bool dec) {
+hufNode& BuildHuffmanTree(map<unsigned char, unsigned int> &HMT, priority_queue<hufNode> &PQ, bool dec) {
     for(const auto &w : HMT) {
-        huff_node huff(w.first, w.second);
+        hufNode huff(w.first, w.second);
 //        cout << "Huf Tree Symbol > " << w.first << endl;
         PQ.push(huff);
     }
     int total = PQ.size();
     for(int i = 0 ; i < total - 1; ++i) {
-        huff_node *h1 = new huff_node(PQ.top()); PQ.pop();
-        huff_node *h2 = new huff_node(PQ.top()); PQ.pop();
-        huff_node *new_node = new huff_node(h1->freq + h2->freq, h1, h2);
+        hufNode *h1 = new hufNode(PQ.top()); PQ.pop();
+        hufNode *h2 = new hufNode(PQ.top()); PQ.pop();
+        hufNode *new_node = new hufNode(h1->freq + h2->freq, h1, h2);
         PQ.push(*new_node);
     }
     root = PQ.top(); PQ.pop();
     return root;
 }
-void BuildHuffmanSymbolEncoding(huff_node *root, string symStr, map<unsigned char, string > &table) {
+void BuildHuffmanSymbolEncoding(hufNode *root, string symStr, map<unsigned char, string > &table) {
     if(root->left == nullptr && root->right == nullptr) {
         table[root->symbol] = symStr;
   //      cout << "huff symbol> " << root->symbol << endl;
@@ -160,12 +160,12 @@ int WriteObjectFile(ofstream &ObjectFile, string BitString) {
 
     return byteCount;
 }
-void HuffmanCompress(char rawfile []) {
+void huffman_compress(char rawfile []) {
     ifstream AsciiFile(rawfile);
     string FileName(rawfile);
     ofstream ObjectFile((FileName + ".hufcomp").c_str(), ios::binary);
     ofstream HuffmanFile((FileName + ".huftable").c_str(), ios::binary);
-    priority_queue<huff_node> PQ;
+    priority_queue<hufNode> PQ;
     map<unsigned char, unsigned int> HuffmanMapTable;
     map<unsigned char, string > HuffmanSymbolEncoding;
     /*
@@ -202,7 +202,7 @@ void HuffmanCompress(char rawfile []) {
     }
 
     int byteCount = WriteObjectFile(ObjectFile, BitString);
-    PrintCompressionInfo(cTotal, HuffmanMapTable, byteCount);
+    print_compress_info(cTotal, HuffmanMapTable, byteCount);
     zipFiles(rawfile, HuffmanSymbolEncoding.size(), byteCount);
 }
 
@@ -224,7 +224,7 @@ string getBitString(unsigned char c) {
 }
 string DecodeHuffmanCode(string &BitString) {
     int cnt = 0;
-    huff_node *h_node = &root;
+    hufNode *h_node = &root;
     string result = "";
 
     while(cnt != BitString.size()) {
@@ -244,7 +244,7 @@ string DecodeHuffmanCode(string &BitString) {
     }
     return result;
 }
-void HuffmanDecompress(char decomp_file[])  {
+void huffman_decompress(char decomp_file[])  {
     string file_name(decomp_file);
     file_name = file_name.substr(0, file_name.size() - 4);
 //    unzipFiles(file_name);
@@ -255,7 +255,7 @@ void HuffmanDecompress(char decomp_file[])  {
     cout << "Object file size : " << ObjSize << endl;
     map<unsigned char, unsigned int> HuffmanMapTable;
     map<unsigned char, string> table;
-    priority_queue<huff_node> PQ;
+    priority_queue<hufNode> PQ;
     unsigned char ch; unsigned int ui; unsigned char whitespace;
     while(InHuffmanFile >> noskipws >> ch >> whitespace >> ui >> whitespace) {
         HuffmanMapTable[ch] = ui;
