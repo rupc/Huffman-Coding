@@ -12,7 +12,7 @@ struct HuffmanNode {
     HuffmanNode(const HuffmanNode& hn);
     HuffmanNode(int f, HuffmanNode *l, HuffmanNode *r);
 };
-//bool operator< (const HuffmanNode &lhs, const HuffmanNode &rhs);
+bool operator< (const HuffmanNode &lhs, const HuffmanNode &rhs);
 typedef std::map<unsigned char, unsigned int> HuffmanTable;
 typedef std::priority_queue<HuffmanNode> PQ;
 
