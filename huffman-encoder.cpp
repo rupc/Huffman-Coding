@@ -1,13 +1,13 @@
 #include "huffman-converter.h"
 
 // read raw file and build the table of pairs of character and its frequency
-void HuffmanConverter::huffman_build_table(std::ifstream &inFile) {
+void HuffmanConverter::build_freq_table(std::ifstream &inFile) {
     unsigned char ch; 
     while(inFile >> std::noskipws >> ch) {
         ++table[ch];
     }
 }
-HuffmanNode* HuffmanConverter::huffman_build_tree() {
+HuffmanNode* HuffmanConverter::build_prefix_tree() {
     PQ pq;
     for(auto &w : table) {
         pq.push(HuffmanNode(w.first, w.second));
@@ -23,6 +23,7 @@ HuffmanNode* HuffmanConverter::huffman_build_tree() {
     return root;
 }
 
+// call this function for encode 
 void HuffmanConverter::encode_symbol() {
     encode_symbol_util(root, eTab, std::string());
 }
@@ -35,6 +36,7 @@ void HuffmanConverter::encode_symbol_util(HuffmanNode *node, EncodeTable &eTab, 
     }
 }
 
+// wrapper function, ordering huffman basic functions
 void encode_files(std::ifstream &file) {
 
 }

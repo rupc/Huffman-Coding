@@ -27,10 +27,10 @@ public:
     HuffmanConverter(std::string &);
     HuffmanConverter(const char *);
     ~HuffmanConverter() {}
-    void huffman_build_table(std::ifstream &);
+    void build_freq_table(std::ifstream &);
     void print_huffman_table(std::ostream &);
     void print_enocde_table(std::ostream &);
-    HuffmanNode* huffman_build_tree();
+    HuffmanNode* build_prefix_tree();
     void encode_symbol();
     void encode_symbol_util(HuffmanNode *, EncodeTable &, std::string);
 private:
