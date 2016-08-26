@@ -77,6 +77,7 @@ int PrintSymbolEncoding(map<unsigned char, string> &ch_str) {
     return lineno;
 }
 hufNode& BuildHuffmanTree(map<unsigned char, unsigned int> &HMT, priority_queue<hufNode> &PQ, bool dec) {
+    // push every node to PQ
     for(const auto &w : HMT) {
         hufNode huff(w.first, w.second);
 //        cout << "Huf Tree Symbol > " << w.first << endl;

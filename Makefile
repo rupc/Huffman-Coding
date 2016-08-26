@@ -14,16 +14,16 @@ $(TARGET): $(OBJ)
 	chmod +x $(TARGET)
 
 huffman-converter.o: $(SRC) huffman-converter.h
-	$(CXX) -c $*.cpp
+	$(CXX) -c $*.cpp $(CXXFLAGS)
 
 huffman-decoder.o: huffman-decoder.cpp huffman-converter.h
-	$(CXX) -c $*.cpp
+	$(CXX) -c $*.cpp $(CXXFLAGS)
 
 huffman-encoder.o: huffman-encoder.cpp huffman-converter.h
-	$(CXX) -c $*.cpp
+	$(CXX) -c $*.cpp $(CXXFLAGS)
 
 huffman-fileio.o: huffman-fileio.cpp huffman-converter.h
-	$(CXX) -c $*.cpp
+	$(CXX) -c $*.cpp $(CXXFLAGS)
 
 run:
 	./$(TARGET)
