@@ -7,7 +7,7 @@ void HuffmanConverter::build_freq_table(std::ifstream &inFile) {
         ++table[ch];
     }
 }
-HuffmanNode* HuffmanConverter::build_prefix_tree() {
+HuffmanNode* HuffmanConverter::huffman_build_tree() {
     PQ pq;
     for(auto &w : table) {
         pq.push(HuffmanNode(w.first, w.second));
