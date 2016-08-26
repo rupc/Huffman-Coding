@@ -23,11 +23,18 @@ HuffmanNode* HuffmanConverter::huffman_build_tree() {
     return root;
 }
 
-void symbol_encode(HuffmanNode *node, EncodeTable &eTab, std::string encStr) {
+void HuffmanConverter::encode_symbol() {
+    encode_symbol_util(root, eTab, std::string());
+}
+void HuffmanConverter::encode_symbol_util(HuffmanNode *node, EncodeTable &eTab, std::string encStr) {
     if (node->left == nullptr && node->right == nullptr) {
         eTab[node->symbol] = encStr;
     } else {
-        symbol_encode(node->left, eTab, encStr + "0");
-        symbol_encode(node->right, eTab, encStr + "1");
+        encode_symbol_util(node->left, eTab, encStr + "0");
+        encode_symbol_util(node->right, eTab, encStr + "1");
     }
+}
+
+void encode_files(std::ifstream &file) {
+
 }

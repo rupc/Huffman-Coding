@@ -16,16 +16,6 @@ HuffmanNode::HuffmanNode(const HuffmanNode& hn) {
 HuffmanNode::HuffmanNode(int f, HuffmanNode *l, HuffmanNode *r) 
     : freq(f), left(l), right(r) {}
 
-void HuffmanConverter::print_huffman_table(std::ostream &out) {
-    if (table.empty()) {
-        out << "Need to build table first\n";
-        return;
-    }
-    out << "Character Frequency Table\n";
-    for (const auto &p : table) {
-        out << (unsigned)p.first << ":" << p.second << "\n";
-    }
-}
 unsigned get_file_size(std::ifstream &is) {
     /*is.seekg(0, is.end());
     unsigned blk_sz = is.tellg();
@@ -40,5 +30,35 @@ int main(int argc, const char *argv[]) {
     hConverter.huffman_build_table(inFile);
     //hConverter.print_huffman_table(std::cout);
     hConverter.huffman_build_tree();
+    hConverter.encode_symbol();
+    hConverter.print_enocde_table(std::cout);
     return 0;
+}
+void HuffmanConverter::print_enocde_table(std::ostream &out) {
+    if (eTab.empty()) {
+        out << "Need to encode characters first\n";
+        return;
+    }
+    out << "|------------------------|\n";
+    out << "| Character Encode Table |\n";
+    out << "|------------------------|\n";
+    for (const auto &p : eTab) {
+        printf("| %3d -> ", (unsigned)p.first);
+        for (const auto &q : p.second) {
+            out << q;
+        }
+        out << "\n";
+    }
+}
+void HuffmanConverter::print_huffman_table(std::ostream &out) {
+    if (table.empty()) {
+        out << "Need to build table first\n";
+        return;
+    }
+    out << "|---------------------------|\n";
+    out << "| Character Frequency Table |\n";
+    out << "|---------------------------|\n";
+    for (const auto &p : table) {
+        out << (unsigned)p.first << ":" << p.second << "\n";
+    }
 }
