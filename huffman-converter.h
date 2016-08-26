@@ -1,6 +1,7 @@
+#include <fstream>
+#include <iostream>
 #include <map>
 #include <queue>
-#include <iostream>
 #include <string>
 
 struct HuffmanNode {
@@ -26,9 +27,8 @@ public:
     void huffman_build_table(std::ifstream &);
     void print_huffman_table(std::ostream &);
     HuffmanNode* huffman_build_tree();
-    void huffman_encode();
-    void huffman_decode();
 private:
     HuffmanTable table;
     HuffmanNode *root;
 };
+

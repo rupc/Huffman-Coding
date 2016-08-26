@@ -16,6 +16,16 @@ HuffmanNode::HuffmanNode(const HuffmanNode& hn) {
 HuffmanNode::HuffmanNode(int f, HuffmanNode *l, HuffmanNode *r) 
     : freq(f), left(l), right(r) {}
 
+void HuffmanConverter::print_huffman_table(std::ostream &out) {
+    if (table.empty()) {
+        out << "Need to build table first\n";
+        return;
+    }
+    out << "Character Frequency Table\n";
+    for (const auto &p : table) {
+        out << (unsigned)p.first << ":" << p.second << "\n";
+    }
+}
 unsigned get_file_size(std::ifstream &is) {
     /*is.seekg(0, is.end());
     unsigned blk_sz = is.tellg();
@@ -29,6 +39,6 @@ int main(int argc, const char *argv[]) {
     HuffmanConverter hConverter;
     hConverter.huffman_build_table(inFile);
     //hConverter.print_huffman_table(std::cout);
-    hConverter.huffman_build_tree();
+    //hConverter.huffman_build_tree();
     return 0;
 }

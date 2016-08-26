@@ -2,8 +2,9 @@ TARGET=huffman-converter
 INCLUDE=.
 CXX=g++
 CXXFLAGS= -std=c++14 -O2
-OBJ=huffman-converter.o huffman-decoder.o huffman-encoder.o huffman-fileio.o
+OBJ=huffman-converter.o huffman-decoder.o huffman-encoder.o
 SRC=$(OBJ:.o=.cpp)
+HEADERS=$(OBJ:.o=.h)
 
 #APP=main
 
@@ -16,13 +17,10 @@ $(TARGET): $(OBJ)
 huffman-converter.o: $(SRC) huffman-converter.h
 	$(CXX) -c $*.cpp $(CXXFLAGS)
 
-huffman-decoder.o: huffman-decoder.cpp huffman-converter.h
+huffman-decoder.o: huffman-decoder.cpp huffman-converter.h 
 	$(CXX) -c $*.cpp $(CXXFLAGS)
 
 huffman-encoder.o: huffman-encoder.cpp huffman-converter.h
-	$(CXX) -c $*.cpp $(CXXFLAGS)
-
-huffman-fileio.o: huffman-fileio.cpp huffman-converter.h
 	$(CXX) -c $*.cpp $(CXXFLAGS)
 
 run:

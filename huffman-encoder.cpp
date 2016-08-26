@@ -1,5 +1,12 @@
 #include "huffman-converter.h"
 
+// read raw file and build the table of pairs of character and its frequency
+void HuffmanConverter::huffman_build_table(std::ifstream &inFile) {
+    unsigned char ch; 
+    while(inFile >> std::noskipws >> ch) {
+        ++table[ch];
+    }
+}
 HuffmanNode* HuffmanConverter::huffman_build_tree() {
     PQ pq;
     for(auto &w : table) {
