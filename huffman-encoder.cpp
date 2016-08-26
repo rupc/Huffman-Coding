@@ -22,3 +22,12 @@ HuffmanNode* HuffmanConverter::huffman_build_tree() {
     root = new HuffmanNode(pq.top()); pq.pop();
     return root;
 }
+
+void symbol_encode(HuffmanNode *node, EncodeTable &eTab, std::string encStr) {
+    if (node->left == nullptr && node->right == nullptr) {
+        eTab[node->symbol] = encStr;
+    } else {
+        symbol_encode(node->left, eTab, encStr + "0");
+        symbol_encode(node->right, eTab, encStr + "1");
+    }
+}

@@ -1,6 +1,7 @@
 #include <fstream>
 #include <iostream>
 #include <map>
+#include <unordered_map>
 #include <queue>
 #include <string>
 
@@ -14,8 +15,10 @@ struct HuffmanNode {
     HuffmanNode(int f, HuffmanNode *l, HuffmanNode *r);
 };
 bool operator< (const HuffmanNode &lhs, const HuffmanNode &rhs);
-typedef std::map<unsigned char, unsigned int> HuffmanTable;
+typedef std::unordered_map<unsigned char, unsigned int> FreqTable;
+typedef std::unordered_map<unsigned char, std::string> EncodeTable;
 typedef std::priority_queue<HuffmanNode> PQ;
+
 
 class HuffmanConverter {
 public:
@@ -27,8 +30,10 @@ public:
     void huffman_build_table(std::ifstream &);
     void print_huffman_table(std::ostream &);
     HuffmanNode* huffman_build_tree();
+    void symbol_encode(HuffmanNode *, FreqTable &, std::string);
 private:
-    HuffmanTable table;
+    FreqTable table;
+    EncodeTable eTab;
     HuffmanNode *root;
 };
 

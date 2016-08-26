@@ -39,6 +39,6 @@ int main(int argc, const char *argv[]) {
     HuffmanConverter hConverter;
     hConverter.huffman_build_table(inFile);
     //hConverter.print_huffman_table(std::cout);
-    //hConverter.huffman_build_tree();
+    hConverter.huffman_build_tree();
     return 0;
 }
