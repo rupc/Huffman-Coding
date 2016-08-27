@@ -41,12 +41,32 @@ void HuffmanConverter::write_to_binary(std::ifstream& inFile, std::ofstream &out
 
     std::string bit_sequence = "";
     bit_sequence.reserve(64);
+    std::string bit_buffer = ""; 
+    bit_buffer.reserve(64);
     unsigned char ch; 
+
     while(inFile >> std::noskipws >> ch) {
-        bit_sequence += eTab[ch];
+        bit_sequence += " " + eTab[ch];
+        bit_buffer += eTab[ch];
+        // assumes each encoded string is less than 64
+        if (bit_buffer.size() >= 64) {
+            std::bitset<64> bv(std::string(bit_buffer.begin(), bit_buffer.begin()+64));
+            bit_buffer = std::string(bit_buffer.begin()+64, bit_buffer.end());
+            unsigned long long binary_form = bv.to_ullong();
+            outFile.write(reinterpret_cast<const char *>(&binary_form), sizeof(binary_form));
+            std::cout << std::hex << binary_form << "\n";
+        }
     }
-    //auto 
-    std::cout << bit_sequence << "\n";
+    // print remainder
+    if (bit_buffer.size() > 0) {
+            std::bitset<64> bv(std::string(bit_buffer.begin(), bit_buffer.end()));
+            unsigned long long binary_form = bv.to_ullong();
+            outFile.write(reinterpret_cast<const char *>(&binary_form), sizeof(binary_form));
+            std::cout << std::hex << binary_form << "\n";
+    }
+    // print remainder
+    //std::cout << bit_sequence << "\n";
+    //std::cout << bit_buffer << "\n";
 }
 
 // wrapper function, ordering huffman basic functions

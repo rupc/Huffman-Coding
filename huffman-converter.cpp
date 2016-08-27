@@ -47,7 +47,7 @@ void HuffmanConverter::print_enocde_table(std::ostream &out) {
     out << "| Character Encode table |\n";
     out << "|------------------------|\n";
     for (const auto &p : eTab) {
-        printf("| %3d -> ", (unsigned)p.first);
+        printf("| %3d(%c) -> ", (unsigned)p.first, p.first);
         for (const auto &q : p.second) {
             out << q;
         }

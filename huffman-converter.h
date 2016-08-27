@@ -4,6 +4,7 @@
 #include <unordered_map>
 #include <queue>
 #include <string>
+#include <bitset>
 
 struct HuffmanNode {
     char symbol;
