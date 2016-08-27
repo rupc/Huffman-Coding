@@ -18,7 +18,7 @@ struct HuffmanNode {
 bool operator< (const HuffmanNode &lhs, const HuffmanNode &rhs);
 typedef std::map<unsigned char, unsigned int> FreqTable;
 typedef std::map<unsigned char, std::string> EncodeTable;
-typedef std::priority_queue<HuffmanNode> PQ;
+typedef std::priority_queue<HuffmanNode> priQ;
 
 class HuffmanConverter {
 public:
