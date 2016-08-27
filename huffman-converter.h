@@ -27,14 +27,19 @@ public:
     HuffmanConverter(std::string &);
     HuffmanConverter(const char *);
     ~HuffmanConverter() {}
+private:
     void build_freq_table(std::ifstream &);
-    void print_huffman_table(std::ostream &);
-    void print_enocde_table(std::ostream &);
     HuffmanNode* build_prefix_tree();
     void encode_symbol();
     void encode_symbol_util(HuffmanNode *, EncodeTable &, std::string);
     void write_to_binary(std::ifstream&, std::ofstream &);
     void write_freq_table(std::ofstream &);
+public:
+    void encode_file(const char *, const char *);
+    void decode_file(const char *, const char *);
+public:
+    void print_huffman_table(std::ostream &);
+    void print_enocde_table(std::ostream &);
 private:
     FreqTable fTab;
     EncodeTable eTab;

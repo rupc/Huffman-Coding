@@ -2,22 +2,13 @@
 #include <iostream>
 #include <fstream>
 
+const char *file1 = "texts/random-text1.txt";
+const char *small_file = "texts/small.txt";
+const char *output = "huff";
+const char *file_table = "freqtable";
 int main(int argc, const char *argv[]) {
-    const char *file1 = "texts/random-text1.txt";
-    const char *small_file = "texts/small.txt";
-    const char *output = "huff";
-    const char *file_table = "freqtable";
-    std::ifstream inFile(small_file);
-    std::ofstream outFile(output);
-    std::ofstream outTable(file_table);
     HuffmanConverter hConverter;
-    hConverter.build_freq_table(inFile);
-    hConverter.print_huffman_table(std::cout);
-    hConverter.build_prefix_tree();
-    hConverter.encode_symbol();
-    hConverter.print_enocde_table(std::cout);
-    hConverter.write_to_binary(inFile, outFile);
-    hConverter.write_freq_table(outTable);
+    hConverter.encode_file(small_file, output);
     return 0;
 }
 bool operator< (const HuffmanNode &h1, const HuffmanNode &h2) {

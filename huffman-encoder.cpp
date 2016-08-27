@@ -46,7 +46,7 @@ void HuffmanConverter::write_to_binary(std::ifstream& inFile, std::ofstream &out
     unsigned char ch; 
 
     while(inFile >> std::noskipws >> ch) {
-        bit_sequence += " " + eTab[ch];
+        bit_sequence += "." + eTab[ch];
         bit_buffer += eTab[ch];
         // assumes each encoded string is less than 64
         if (bit_buffer.size() >= 64) {
@@ -54,7 +54,7 @@ void HuffmanConverter::write_to_binary(std::ifstream& inFile, std::ofstream &out
             bit_buffer = std::string(bit_buffer.begin()+64, bit_buffer.end());
             unsigned long long binary_form = bv.to_ullong();
             outFile.write(reinterpret_cast<const char *>(&binary_form), sizeof(binary_form));
-            std::cout << std::hex << binary_form << "\n";
+            //std::cout << std::hex << binary_form << "\n";
         }
     }
     // print remainder
@@ -62,7 +62,7 @@ void HuffmanConverter::write_to_binary(std::ifstream& inFile, std::ofstream &out
             std::bitset<64> bv(std::string(bit_buffer.begin(), bit_buffer.end()));
             unsigned long long binary_form = bv.to_ullong();
             outFile.write(reinterpret_cast<const char *>(&binary_form), sizeof(binary_form));
-            std::cout << std::hex << binary_form << "\n";
+            //std::cout << std::hex << binary_form << "\n";
     }
     // print remainder
     //std::cout << bit_sequence << "\n";
@@ -75,6 +75,21 @@ void HuffmanConverter::write_freq_table(std::ofstream &inFile) {
 }
 
 // wrapper function, ordering huffman basic functions
-void encode_files(std::ifstream &file) {
+void HuffmanConverter::encode_file(const char *input, const char *output) {
+    std::ifstream inFile(input);
+    std::ofstream outFile(output);
+    std::ofstream outTable(std::string(output) + ".freq_table");
+    if (!inFile.is_open()) {
+        std::cerr << input << "doesn't exist" << std::endl;
+        return;
+    }
+    build_freq_table(inFile);
+    build_prefix_tree();
+    encode_symbol();
+    write_to_binary(inFile, outFile);
+    write_freq_table(outTable);
 
+    inFile.close();
+    outFile.close();
+    outTable.close();
 }
