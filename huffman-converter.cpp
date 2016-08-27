@@ -4,14 +4,17 @@
 
 int main(int argc, const char *argv[]) {
     const char *file1 = "texts/random-text1.txt";
-    std::ifstream inFile(file1);
-
+    const char *small_file = "texts/small.txt";
+    const char *output = "huff";
+    std::ifstream inFile(small_file);
+    std::ofstream outFile(output);
     HuffmanConverter hConverter;
     hConverter.build_freq_table(inFile);
-    //hConverter.print_huffman_table(std::cout);
+    hConverter.print_huffman_table(std::cout);
     hConverter.build_prefix_tree();
     hConverter.encode_symbol();
     hConverter.print_enocde_table(std::cout);
+    hConverter.write_to_binary(inFile, outFile);
     return 0;
 }
 bool operator< (const HuffmanNode &h1, const HuffmanNode &h2) {
@@ -41,7 +44,7 @@ void HuffmanConverter::print_enocde_table(std::ostream &out) {
         return;
     }
     out << "|------------------------|\n";
-    out << "| Character Encode Table |\n";
+    out << "| Character Encode table |\n";
     out << "|------------------------|\n";
     for (const auto &p : eTab) {
         printf("| %3d -> ", (unsigned)p.first);
@@ -52,14 +55,15 @@ void HuffmanConverter::print_enocde_table(std::ostream &out) {
     }
 }
 void HuffmanConverter::print_huffman_table(std::ostream &out) {
-    if (table.empty()) {
-        out << "Need to build table first\n";
+    if (fTab.empty()) {
+        out << "Need to build fTab first\n";
         return;
     }
     out << "|---------------------------|\n";
-    out << "| Character Frequency Table |\n";
+    out << "| Character Frequency table |\n";
     out << "|---------------------------|\n";
-    for (const auto &p : table) {
-        out << (unsigned)p.first << ":" << p.second << "\n";
+    for (const auto &p : fTab) {
+        printf("| %3d : %3d\n", (unsigned)p.first, p.second);
+        //out << (unsigned)p.first << ":" << p.second << "\n";
     }
 }
