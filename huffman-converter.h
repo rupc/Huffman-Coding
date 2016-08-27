@@ -34,6 +34,7 @@ public:
     void encode_symbol();
     void encode_symbol_util(HuffmanNode *, EncodeTable &, std::string);
     void write_to_binary(std::ifstream&, std::ofstream &);
+    void write_freq_table(std::ofstream &);
 private:
     FreqTable fTab;
     EncodeTable eTab;

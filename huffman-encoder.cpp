@@ -68,6 +68,11 @@ void HuffmanConverter::write_to_binary(std::ifstream& inFile, std::ofstream &out
     //std::cout << bit_sequence << "\n";
     //std::cout << bit_buffer << "\n";
 }
+void HuffmanConverter::write_freq_table(std::ofstream &inFile) {
+    for (auto &p : fTab) {
+        inFile << (unsigned)p.first << " " << p.second << "\n";
+    }
+}
 
 // wrapper function, ordering huffman basic functions
 void encode_files(std::ifstream &file) {
