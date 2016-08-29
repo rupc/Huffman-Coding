@@ -2,13 +2,13 @@
 #include <iostream>
 #include <fstream>
 
-const char *file1 = "texts/random-text1.txt";
-const char *small_file = "texts/small.txt";
-const char *output = "huff";
-const char *file_table = "freqtable";
+const char *medium_file = "medium.txt";
+const char *small_file = "small.txt";
+const char *large_file = "large.txt";
+
 int main(int argc, const char *argv[]) {
     HuffmanConverter hConverter;
-    hConverter.encode_file(small_file, output);
+    hConverter.encode_file(large_file, nullptr);
     return 0;
 }
 bool operator< (const HuffmanNode &h1, const HuffmanNode &h2) {

@@ -38,18 +38,18 @@ void HuffmanConverter::encode_symbol_util(HuffmanNode *node, EncodeTable &eTab, 
     }
 }
 
-void HuffmanConverter::write_to_binary(std::ifstream& inFile, std::ofstream &outFile) {
+Bytes HuffmanConverter::write_to_binary(std::ifstream& inFile, std::ofstream &outFile) {
     inFile.clear();
     inFile.seekg(0, std::ios::beg);
 
     std::string bit_sequence = "";
-    bit_sequence.reserve(64);
     std::string bit_buffer = ""; 
+    bit_sequence.reserve(64);
     bit_buffer.reserve(64);
     unsigned char ch; 
-
+    Bytes bytes = 0;
     while(inFile >> std::noskipws >> ch) {
-        bit_sequence += "." + eTab[ch];
+        //bit_sequence += "." + eTab[ch];
         bit_buffer += eTab[ch];
         // assumes each encoded string is less than 64
         if (bit_buffer.size() >= 64) {
@@ -58,18 +58,22 @@ void HuffmanConverter::write_to_binary(std::ifstream& inFile, std::ofstream &out
             unsigned long long binary_form = bv.to_ullong();
             outFile.write(reinterpret_cast<const char *>(&binary_form), sizeof(binary_form));
             //std::cout << std::hex << binary_form << "\n";
+            bytes += sizeof(binary_form);
         }
     }
+    
     // print remainder
     if (bit_buffer.size() > 0) {
             std::bitset<64> bv(std::string(bit_buffer.begin(), bit_buffer.end()));
             unsigned long long binary_form = bv.to_ullong();
             outFile.write(reinterpret_cast<const char *>(&binary_form), sizeof(binary_form));
+            bytes += sizeof(binary_form);
             //std::cout << std::hex << binary_form << "\n";
     }
     // print remainder
-    //std::cout << bit_sequence << "\n";
-    //std::cout << bit_buffer << "\n";
+    /*std::cout << bit_sequence << "\n";
+    std::cout << bit_buffer << "\n";*/
+    return bytes;
 }
 void HuffmanConverter::write_freq_table(std::ofstream &inFile) {
     for (auto &p : fTab) {
@@ -77,21 +81,43 @@ void HuffmanConverter::write_freq_table(std::ofstream &inFile) {
     }
 }
 
+const char *loc_text = "texts/";
+const char* path_freq = "./frequency-table/";
+const char* path_output = "./encoded-files/";
+const char *postfix_tab =".tab";
+const char *postfix_huf =".huf";
+// just concat 3 strings of path, input, postfix
+
+std::string format_path_name(const char *path, const char *input, const char *postfix) {
+    return (std::string(path).append(input).append(postfix));
+}
 // wrapper function, ordering huffman basic functions
 void HuffmanConverter::encode_file(const char *input, const char *output = nullptr) {
-    std::ifstream inFile(input);
-    std::ofstream outFile(output);
-    std::ofstream outTable(std::string(output) + ".tab");
+    // get the pathes needed
+    std::string ipath = std::string(loc_text) + input; // input file's path
+    std::string opath = format_path_name(path_output, input, postfix_huf); // output file's path
+    std::string tpath = format_path_name(path_freq, input, postfix_tab); // table file's path
+
+    std::ifstream inFile(ipath);
+    std::ofstream outFile(opath);
+    std::ofstream outTable(tpath);
+
     if (!inFile.is_open()) {
-        std::cerr << "File name:" input << "doesn't exist." << std::endl;
+        std::cerr << "File name:" << input << " doesn't exist." << std::endl;
+        std::cerr << "Encoding fails!" << std::endl;
         return;
     }
-    build_freq_table(inFile);
+    Bytes total = build_freq_table(inFile);
     build_prefix_tree();
     encode_symbol();
-    write_to_binary(inFile, outFile);
+    Bytes after = write_to_binary(inFile, outFile);
     write_freq_table(outTable);
-
+    //std::cout << "Size of original file:" << total << "\n";
+    printf("%-20s : %s\n", "File Name", input);
+    printf("%-20s : %u\n", "Different Characters", (unsigned)fTab.size());
+    printf("%-20s : %llu\n", "Original Size", total);
+    printf("%-20s : %llu -> %lld\n", "Change Info", total, after);
+    printf("%-20s : %-4f%%\n", "Compress rate", (double)after/total*100.0);
     inFile.close();
     outFile.close();
     outTable.close();
