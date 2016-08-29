@@ -1,0 +1,78 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+BuildHuffmanSymbolEncoding	main.cpp	/^void BuildHuffmanSymbolEncoding(hufNode *root, string symStr, map<unsigned char, string > &table) {$/;"	f
+BuildHuffmanTree	main.cpp	/^hufNode& BuildHuffmanTree(map<unsigned char, unsigned int> &HMT, priority_queue<hufNode> &PQ, bool dec) {$/;"	f
+Bytes	huffman-converter.h	/^typedef unsigned long long Bytes;$/;"	t
+CXX	Makefile	/^CXX=g++$/;"	m
+CXXFLAGS	Makefile	/^CXXFLAGS= -std=c++14 -O2$/;"	m
+DecodeHuffmanCode	main.cpp	/^string DecodeHuffmanCode(string &BitString) {$/;"	f
+EncodeTable	huffman-converter.h	/^typedef std::map<unsigned char, std::string> EncodeTable;$/;"	t
+FreqTable	huffman-converter.h	/^typedef std::map<unsigned char, unsigned int> FreqTable;$/;"	t
+HEADERS	Makefile	/^HEADERS=$(OBJ:.o=.h)$/;"	m
+HuffmanConverter	huffman-converter.h	/^    HuffmanConverter() {}$/;"	f	class:HuffmanConverter
+HuffmanConverter	huffman-converter.h	/^class HuffmanConverter {$/;"	c
+HuffmanNode	huffman-converter.cpp	/^HuffmanNode::HuffmanNode(const HuffmanNode& h) {$/;"	f	class:HuffmanNode
+HuffmanNode	huffman-converter.cpp	/^HuffmanNode::HuffmanNode(int f, HuffmanNode *l, HuffmanNode *r) $/;"	f	class:HuffmanNode
+HuffmanNode	huffman-converter.cpp	/^HuffmanNode::HuffmanNode(unsigned char c, unsigned f)$/;"	f	class:HuffmanNode
+HuffmanNode	huffman-converter.h	/^struct HuffmanNode {$/;"	s
+INCLUDE	Makefile	/^INCLUDE=.$/;"	m
+OBJ	Makefile	/^OBJ=huffman-converter.o huffman-decoder.o huffman-encoder.o$/;"	m
+PrintSymbolEncoding	main.cpp	/^int PrintSymbolEncoding(map<unsigned char, string> &ch_str) {$/;"	f
+SRC	Makefile	/^SRC=$(OBJ:.o=.cpp)$/;"	m
+TARGET	Makefile	/^TARGET=huffman-converter$/;"	m
+WriteObjectFile	main.cpp	/^int WriteObjectFile(ofstream &ObjectFile, string BitString) {$/;"	f
+build_freq_table	huffman-encoder.cpp	/^Bytes HuffmanConverter::build_freq_table(std::ifstream &inFile) {$/;"	f	class:HuffmanConverter
+build_prefix_tree	huffman-encoder.cpp	/^HuffmanNode* HuffmanConverter::build_prefix_tree() {$/;"	f	class:HuffmanConverter
+eTab	huffman-converter.h	/^    EncodeTable eTab;$/;"	m	class:HuffmanConverter
+encode_file	huffman-encoder.cpp	/^void HuffmanConverter::encode_file(const char *input, const char *output = nullptr) {$/;"	f	class:HuffmanConverter
+encode_symbol	huffman-encoder.cpp	/^void HuffmanConverter::encode_symbol() {$/;"	f	class:HuffmanConverter
+encode_symbol_util	huffman-encoder.cpp	/^void HuffmanConverter::encode_symbol_util(HuffmanNode *node, EncodeTable &eTab, std::string encStr) {$/;"	f	class:HuffmanConverter
+fTab	huffman-converter.h	/^    FreqTable fTab;$/;"	m	class:HuffmanConverter
+format_path_name	huffman-encoder.cpp	/^std::string format_path_name(const char *path, const char *input, const char *postfix) {$/;"	f
+freq	huffman-converter.h	/^    unsigned freq;$/;"	m	struct:HuffmanNode
+freq	main.cpp	/^        int freq;$/;"	m	class:hufNode	file:
+getBitString	main.cpp	/^string getBitString(unsigned char c) {$/;"	f
+getFileSize	main.cpp	/^int getFileSize(ifstream &in) {$/;"	f
+get_file_size	huffman-converter.cpp	/^unsigned get_file_size(std::ifstream &is) {$/;"	f
+hufNode	main.cpp	/^        hufNode() {}$/;"	f	class:hufNode
+hufNode	main.cpp	/^        hufNode(char s, int f) : symbol(s), freq(f) {$/;"	f	class:hufNode
+hufNode	main.cpp	/^        hufNode(const hufNode& hn) {$/;"	f	class:hufNode
+hufNode	main.cpp	/^        hufNode(int f, hufNode *l, hufNode *r) {$/;"	f	class:hufNode
+hufNode	main.cpp	/^class hufNode {$/;"	c	file:
+huffman_compress	main.cpp	/^void huffman_compress(char rawfile []) {$/;"	f
+huffman_decompress	main.cpp	/^void huffman_decompress(char decomp_file[])  {$/;"	f
+large_file	huffman-converter.cpp	/^const char *large_file = "large.txt";$/;"	v
+left	huffman-converter.h	/^    HuffmanNode *left;$/;"	m	struct:HuffmanNode
+left	main.cpp	/^        hufNode *left;$/;"	m	class:hufNode	file:
+loc_text	huffman-encoder.cpp	/^const char *loc_text = "texts\/";$/;"	v
+main	huffman-converter.cpp	/^int main(int argc, const char *argv[]) {$/;"	f
+main	main.cpp	/^int main(int argc, char *argv[]) {$/;"	f
+medium_file	huffman-converter.cpp	/^const char *medium_file = "medium.txt";$/;"	v
+operator <	huffman-converter.cpp	/^bool operator< (const HuffmanNode &h1, const HuffmanNode &h2) {$/;"	f
+operator <	main.cpp	/^bool operator < (const hufNode &hc1, const hufNode &hc2) {$/;"	f
+path_freq	huffman-encoder.cpp	/^const char* path_freq = ".\/frequency-table\/";$/;"	v
+path_output	huffman-encoder.cpp	/^const char* path_output = ".\/encoded-files\/";$/;"	v
+postfix_huf	huffman-encoder.cpp	/^const char *postfix_huf =".huf";$/;"	v
+postfix_tab	huffman-encoder.cpp	/^const char *postfix_tab =".tab";$/;"	v
+priQ	huffman-converter.h	/^typedef std::priority_queue<HuffmanNode> priQ;$/;"	t
+print_compress_info	main.cpp	/^void print_compress_info(unsigned int cTotal, map<unsigned char, unsigned int> &ch_freq, unsigned int byteCount) {$/;"	f
+print_enocde_table	huffman-converter.cpp	/^void HuffmanConverter::print_enocde_table(std::ostream &out) {$/;"	f	class:HuffmanConverter
+print_huffman_table	huffman-converter.cpp	/^void HuffmanConverter::print_huffman_table(std::ostream &out) {$/;"	f	class:HuffmanConverter
+print_huffman_table	huffman-fileio.cpp	/^void HuffmanConverter::print_huffman_table(std::ostream &out) {$/;"	f	class:HuffmanConverter
+right	huffman-converter.h	/^    HuffmanNode *right;$/;"	m	struct:HuffmanNode
+right	main.cpp	/^        hufNode *right;$/;"	m	class:hufNode	file:
+root	huffman-converter.h	/^    HuffmanNode *root;$/;"	m	class:HuffmanConverter
+root	main.cpp	/^hufNode root;$/;"	v
+small_file	huffman-converter.cpp	/^const char *small_file = "small.txt";$/;"	v
+symbol	huffman-converter.h	/^    char symbol;$/;"	m	struct:HuffmanNode
+symbol	main.cpp	/^        char symbol;$/;"	m	class:hufNode	file:
+unzipFiles	main.cpp	/^void unzipFiles(string cfile) {$/;"	f
+what_to_process	main.cpp	/^void what_to_process(int argc, char *argv[]) {$/;"	f
+write_freq_table	huffman-encoder.cpp	/^void HuffmanConverter::write_freq_table(std::ofstream &inFile) {$/;"	f	class:HuffmanConverter
+write_to_binary	huffman-encoder.cpp	/^Bytes HuffmanConverter::write_to_binary(std::ifstream& inFile, std::ofstream &outFile) {$/;"	f	class:HuffmanConverter
+zipFiles	main.cpp	/^void zipFiles(string rawfile, const int &headLineno, const int &byteCount) {$/;"	f
+~HuffmanConverter	huffman-converter.h	/^    ~HuffmanConverter() {}$/;"	f	class:HuffmanConverter
