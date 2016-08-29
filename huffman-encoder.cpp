@@ -1,10 +1,13 @@
 #include "huffman-converter.h"
 // read raw file and build the fTab of pairs of character and its frequency
-void HuffmanConverter::build_freq_table(std::ifstream &inFile) {
+Bytes HuffmanConverter::build_freq_table(std::ifstream &inFile) {
     unsigned char ch; 
+    Bytes bytes = 0;
     while(inFile >> std::noskipws >> ch) {
         ++fTab[ch];
+        ++bytes;
     }
+    return bytes;
 }
 HuffmanNode* HuffmanConverter::build_prefix_tree() {
     priQ pq;
@@ -75,12 +78,12 @@ void HuffmanConverter::write_freq_table(std::ofstream &inFile) {
 }
 
 // wrapper function, ordering huffman basic functions
-void HuffmanConverter::encode_file(const char *input, const char *output) {
+void HuffmanConverter::encode_file(const char *input, const char *output = nullptr) {
     std::ifstream inFile(input);
     std::ofstream outFile(output);
-    std::ofstream outTable(std::string(output) + ".freq_table");
+    std::ofstream outTable(std::string(output) + ".tab");
     if (!inFile.is_open()) {
-        std::cerr << input << "doesn't exist" << std::endl;
+        std::cerr << "File name:" input << "doesn't exist." << std::endl;
         return;
     }
     build_freq_table(inFile);

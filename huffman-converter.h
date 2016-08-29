@@ -19,7 +19,7 @@ bool operator< (const HuffmanNode &lhs, const HuffmanNode &rhs);
 typedef std::map<unsigned char, unsigned int> FreqTable;
 typedef std::map<unsigned char, std::string> EncodeTable;
 typedef std::priority_queue<HuffmanNode> priQ;
-
+typedef unsigned long long Bytes;
 class HuffmanConverter {
 public:
     HuffmanConverter() {}
@@ -28,7 +28,7 @@ public:
     HuffmanConverter(const char *);
     ~HuffmanConverter() {}
 private:
-    void build_freq_table(std::ifstream &);
+    Bytes build_freq_table(std::ifstream &);
     HuffmanNode* build_prefix_tree();
     void encode_symbol();
     void encode_symbol_util(HuffmanNode *, EncodeTable &, std::string);
