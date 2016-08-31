@@ -27,6 +27,7 @@ TARGET	Makefile	/^TARGET=huffman-converter$/;"	m
 WriteObjectFile	main.cpp	/^int WriteObjectFile(ofstream &ObjectFile, string BitString) {$/;"	f
 build_freq_table	huffman-encoder.cpp	/^Bytes HuffmanConverter::build_freq_table(std::ifstream &inFile) {$/;"	f	class:HuffmanConverter
 build_prefix_tree	huffman-encoder.cpp	/^HuffmanNode* HuffmanConverter::build_prefix_tree() {$/;"	f	class:HuffmanConverter
+compare_rate	huffman-encoder.cpp	/^double HuffmanConverter::compare_rate(std::ifstream &before, std::ifstream &after) {$/;"	f	class:HuffmanConverter
 eTab	huffman-converter.h	/^    EncodeTable eTab;$/;"	m	class:HuffmanConverter
 encode_file	huffman-encoder.cpp	/^void HuffmanConverter::encode_file(const char *input, const char *output = nullptr) {$/;"	f	class:HuffmanConverter
 encode_symbol	huffman-encoder.cpp	/^void HuffmanConverter::encode_symbol() {$/;"	f	class:HuffmanConverter
@@ -37,7 +38,7 @@ freq	huffman-converter.h	/^    unsigned freq;$/;"	m	struct:HuffmanNode
 freq	main.cpp	/^        int freq;$/;"	m	class:hufNode	file:
 getBitString	main.cpp	/^string getBitString(unsigned char c) {$/;"	f
 getFileSize	main.cpp	/^int getFileSize(ifstream &in) {$/;"	f
-get_file_size	huffman-converter.cpp	/^unsigned get_file_size(std::ifstream &is) {$/;"	f
+get_file_size	huffman-converter.cpp	/^unsigned long long get_file_size(std::ifstream &is) {$/;"	f
 hufNode	main.cpp	/^        hufNode() {}$/;"	f	class:hufNode
 hufNode	main.cpp	/^        hufNode(char s, int f) : symbol(s), freq(f) {$/;"	f	class:hufNode
 hufNode	main.cpp	/^        hufNode(const hufNode& hn) {$/;"	f	class:hufNode
@@ -73,6 +74,6 @@ symbol	main.cpp	/^        char symbol;$/;"	m	class:hufNode	file:
 unzipFiles	main.cpp	/^void unzipFiles(string cfile) {$/;"	f
 what_to_process	main.cpp	/^void what_to_process(int argc, char *argv[]) {$/;"	f
 write_freq_table	huffman-encoder.cpp	/^void HuffmanConverter::write_freq_table(std::ofstream &inFile) {$/;"	f	class:HuffmanConverter
-write_to_binary	huffman-encoder.cpp	/^Bytes HuffmanConverter::write_to_binary(std::ifstream& inFile, std::ofstream &outFile) {$/;"	f	class:HuffmanConverter
+write_to_binary	huffman-encoder.cpp	/^void HuffmanConverter::write_to_binary(std::ifstream& inFile, std::ofstream &outFile) {$/;"	f	class:HuffmanConverter
 zipFiles	main.cpp	/^void zipFiles(string rawfile, const int &headLineno, const int &byteCount) {$/;"	f
 ~HuffmanConverter	huffman-converter.h	/^    ~HuffmanConverter() {}$/;"	f	class:HuffmanConverter

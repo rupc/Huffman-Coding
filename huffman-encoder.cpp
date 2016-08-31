@@ -38,7 +38,7 @@ void HuffmanConverter::encode_symbol_util(HuffmanNode *node, EncodeTable &eTab, 
     }
 }
 
-Bytes HuffmanConverter::write_to_binary(std::ifstream& inFile, std::ofstream &outFile) {
+void HuffmanConverter::write_to_binary(std::ifstream& inFile, std::ofstream &outFile) {
     inFile.clear();
     inFile.seekg(0, std::ios::beg);
 
@@ -47,7 +47,6 @@ Bytes HuffmanConverter::write_to_binary(std::ifstream& inFile, std::ofstream &ou
     bit_sequence.reserve(64);
     bit_buffer.reserve(64);
     unsigned char ch; 
-    Bytes bytes = 0;
     while(inFile >> std::noskipws >> ch) {
         //bit_sequence += "." + eTab[ch];
         bit_buffer += eTab[ch];
@@ -58,7 +57,6 @@ Bytes HuffmanConverter::write_to_binary(std::ifstream& inFile, std::ofstream &ou
             unsigned long long binary_form = bv.to_ullong();
             outFile.write(reinterpret_cast<const char *>(&binary_form), sizeof(binary_form));
             //std::cout << std::hex << binary_form << "\n";
-            bytes += sizeof(binary_form);
         }
     }
     
@@ -67,13 +65,11 @@ Bytes HuffmanConverter::write_to_binary(std::ifstream& inFile, std::ofstream &ou
             std::bitset<64> bv(std::string(bit_buffer.begin(), bit_buffer.end()));
             unsigned long long binary_form = bv.to_ullong();
             outFile.write(reinterpret_cast<const char *>(&binary_form), sizeof(binary_form));
-            bytes += sizeof(binary_form);
             //std::cout << std::hex << binary_form << "\n";
     }
     // print remainder
     /*std::cout << bit_sequence << "\n";
     std::cout << bit_buffer << "\n";*/
-    return bytes;
 }
 void HuffmanConverter::write_freq_table(std::ofstream &inFile) {
     for (auto &p : fTab) {
@@ -107,18 +103,33 @@ void HuffmanConverter::encode_file(const char *input, const char *output = nullp
         std::cerr << "Encoding fails!" << std::endl;
         return;
     }
-    Bytes total = build_freq_table(inFile);
+    build_freq_table(inFile);
     build_prefix_tree();
     encode_symbol();
-    Bytes after = write_to_binary(inFile, outFile);
+    write_to_binary(inFile, outFile);
     write_freq_table(outTable);
     //std::cout << "Size of original file:" << total << "\n";
     printf("%-20s : %s\n", "File Name", input);
     printf("%-20s : %u\n", "Different Characters", (unsigned)fTab.size());
-    printf("%-20s : %llu\n", "Original Size", total);
+
+    /*printf("%-20s : %llu\n", "Original Size", total);
     printf("%-20s : %llu -> %lld\n", "Change Info", total, after);
-    printf("%-20s : %-4f%%\n", "Compress rate", (double)after/total*100.0);
+    printf("%-20s : %-4f%%\n", "Compress rate", (double)after/total*100.0);*/
+
+    inFile.clear();
+    inFile.seekg(0, std::ios_base::beg);
+    std::ifstream afterFile(opath, std::ios::in | std::ios::binary);
+
+    double zip_rate = compare_rate(inFile, afterFile);
+    printf("%-20s : %-4.4f%%\n", "Compress rate", zip_rate);
     inFile.close();
     outFile.close();
     outTable.close();
+    afterFile.close();
+}
+double HuffmanConverter::compare_rate(std::ifstream &before, std::ifstream &after) {
+    unsigned long long before_sz = get_file_size(before);
+    unsigned long long after_sz = get_file_size(after);
+    //std::cout << before_sz << " " << after_sz << "\n";
+    return ((double)after_sz/before_sz)*100.0;
 }

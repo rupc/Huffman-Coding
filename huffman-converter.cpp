@@ -26,11 +26,11 @@ HuffmanNode::HuffmanNode(const HuffmanNode& h) {
 HuffmanNode::HuffmanNode(int f, HuffmanNode *l, HuffmanNode *r) 
     : freq(f), left(l), right(r) {}
 
-unsigned get_file_size(std::ifstream &is) {
-    /*is.seekg(0, is.end());
-    unsigned blk_sz = is.tellg();
-    is.seekg(0, is.beg());
-    return blk_sz;*/
+unsigned long long get_file_size(std::ifstream &is) {
+    is.seekg(0, std::ios::end);
+    unsigned long long blk_sz = is.tellg();
+    is.seekg(0, std::ios::beg);
+    return blk_sz;
 }
 void HuffmanConverter::print_enocde_table(std::ostream &out) {
     if (eTab.empty()) {

@@ -21,6 +21,7 @@ typedef std::map<unsigned char, std::string> EncodeTable;
 typedef std::priority_queue<HuffmanNode> priQ;
 typedef unsigned long long Bytes;
 
+unsigned long long get_file_size(std::ifstream &is);
 class HuffmanConverter {
 public:
     HuffmanConverter() {}
@@ -33,11 +34,12 @@ private:
     HuffmanNode* build_prefix_tree();
     void encode_symbol();
     void encode_symbol_util(HuffmanNode *, EncodeTable &, std::string);
-    Bytes write_to_binary(std::ifstream&, std::ofstream &);
+    void write_to_binary(std::ifstream&, std::ofstream &);
     void write_freq_table(std::ofstream &);
 public:
     void encode_file(const char *, const char *);
     void decode_file(const char *, const char *);
+    double compare_rate(std::ifstream &, std::ifstream &);
 public:
     void print_huffman_table(std::ostream &);
     void print_enocde_table(std::ostream &);
