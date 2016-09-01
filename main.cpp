@@ -258,6 +258,7 @@ void huffman_decompress(char decomp_file[])  {
     map<unsigned char, string> table;
     priority_queue<hufNode> PQ;
     unsigned char ch; unsigned int ui; unsigned char whitespace;
+    // At first, build frequency table 
     while(InHuffmanFile >> noskipws >> ch >> whitespace >> ui >> whitespace) {
         HuffmanMapTable[ch] = ui;
         cout << ch << " " << ui << endl;

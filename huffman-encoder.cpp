@@ -77,48 +77,45 @@ void HuffmanConverter::write_freq_table(std::ofstream &inFile) {
     }
 }
 
-const char *loc_text = "texts/";
-const char* path_freq = "./frequency-table/";
-const char* path_output = "./encoded-files/";
-const char *postfix_tab =".tab";
-const char *postfix_huf =".huf";
 // just concat 3 strings of path, input, postfix
 
-std::string format_path_name(const char *path, const char *input, const char *postfix) {
+inline std::string format_path_name(const char *path, const char *input, const char *postfix) {
     return (std::string(path).append(input).append(postfix));
 }
 // wrapper function, ordering huffman basic functions
 void HuffmanConverter::encode_file(const char *input, const char *output = nullptr) {
     // get the pathes needed
     std::string ipath = std::string(loc_text) + input; // input file's path
-    std::string opath = format_path_name(path_output, input, postfix_huf); // output file's path
+    std::string opath = format_path_name(path_encoded, input, postfix_huf); // output file's path
     std::string tpath = format_path_name(path_freq, input, postfix_tab); // table file's path
 
     std::ifstream inFile(ipath);
     std::ofstream outFile(opath);
     std::ofstream outTable(tpath);
-
+    std::ifstream afterFile;
     if (!inFile.is_open()) {
         std::cerr << "File name:" << input << " doesn't exist." << std::endl;
         std::cerr << "Encoding fails!" << std::endl;
         return;
     }
+    // core functions
     build_freq_table(inFile);
     build_prefix_tree();
     encode_symbol();
     write_to_binary(inFile, outFile);
     write_freq_table(outTable);
-    //std::cout << "Size of original file:" << total << "\n";
-    printf("%-20s : %s\n", "File Name", input);
-    printf("%-20s : %u\n", "Different Characters", (unsigned)fTab.size());
+
+    inFile.clear();
+    inFile.seekg(0, std::ios_base::beg);
+    afterFile.open(opath, std::ios::in | std::ios::binary);
+
 
     /*printf("%-20s : %llu\n", "Original Size", total);
     printf("%-20s : %llu -> %lld\n", "Change Info", total, after);
     printf("%-20s : %-4f%%\n", "Compress rate", (double)after/total*100.0);*/
 
-    inFile.clear();
-    inFile.seekg(0, std::ios_base::beg);
-    std::ifstream afterFile(opath, std::ios::in | std::ios::binary);
+    printf("%-20s : %s\n", "File Name", input);
+    printf("%-20s : %u\n", "Different Characters", (unsigned)fTab.size());
 
     double zip_rate = compare_rate(inFile, afterFile);
     printf("%-20s : %-4.4f%%\n", "Compress rate", zip_rate);
