@@ -22,12 +22,7 @@ typedef std::map<unsigned char, std::string> invEncodeTable;
 typedef std::priority_queue<HuffmanNode> priQ;
 typedef unsigned long long Bytes;
 
-const char *loc_text = "texts/";
-const char* path_freq = "./frequency-table/";
-const char* path_encoded = "./encoded-files/";
-const char *postfix_tab =".tab";
-const char *postfix_huf =".huf";
-
+unsigned get_file_size(const std::string& address);
 unsigned long long get_file_size(std::ifstream &is);
 class HuffmanConverter {
 public:
@@ -46,11 +41,20 @@ private:
 public:
     void encode_file(const char *, const char *);
     void decode_file(const char *, const char *);
-    double compare_rate(std::ifstream &, std::ifstream &);
+    double compare_rate(const std::string &, const std::string &);
 public:
+// just concat 3 strings of path, input, postfix
+    inline std::string format_path_name(const char *path, const char *input, const char *postfix) {
+        return (std::string(path).append(input).append(postfix));
+    }
     void print_huffman_table(std::ostream &);
     void print_enocde_table(std::ostream &);
 private:
+    const char *loc_text = "texts/";
+    const char* path_freq = "./frequency-table/";
+    const char* path_encoded = "./encoded-files/";
+    const char *postfix_tab =".tab";
+    const char *postfix_huf =".huf";
     FreqTable fTab;
     EncodeTable eTab;
     HuffmanNode *root;

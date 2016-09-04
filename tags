@@ -27,19 +27,19 @@ TARGET	Makefile	/^TARGET=huffman-converter$/;"	m
 WriteObjectFile	main.cpp	/^int WriteObjectFile(ofstream &ObjectFile, string BitString) {$/;"	f
 build_freq_table	huffman-encoder.cpp	/^Bytes HuffmanConverter::build_freq_table(std::ifstream &inFile) {$/;"	f	class:HuffmanConverter
 build_prefix_tree	huffman-encoder.cpp	/^HuffmanNode* HuffmanConverter::build_prefix_tree() {$/;"	f	class:HuffmanConverter
-compare_rate	huffman-encoder.cpp	/^double HuffmanConverter::compare_rate(std::ifstream &before, std::ifstream &after) {$/;"	f	class:HuffmanConverter
+compare_rate	huffman-encoder.cpp	/^double HuffmanConverter::compare_rate(const std::string &before, const std::string &after) {$/;"	f	class:HuffmanConverter
 decode_file	huffman-decoder.cpp	/^void HuffmanConverter::decode_file(const char *inFile, const char *outFile) {$/;"	f	class:HuffmanConverter
 eTab	huffman-converter.h	/^    EncodeTable eTab;$/;"	m	class:HuffmanConverter
 encode_file	huffman-encoder.cpp	/^void HuffmanConverter::encode_file(const char *input, const char *output = nullptr) {$/;"	f	class:HuffmanConverter
 encode_symbol	huffman-encoder.cpp	/^void HuffmanConverter::encode_symbol() {$/;"	f	class:HuffmanConverter
 encode_symbol_util	huffman-encoder.cpp	/^void HuffmanConverter::encode_symbol_util(HuffmanNode *node, EncodeTable &eTab, std::string encStr) {$/;"	f	class:HuffmanConverter
 fTab	huffman-converter.h	/^    FreqTable fTab;$/;"	m	class:HuffmanConverter
-format_path_name	huffman-encoder.cpp	/^inline std::string format_path_name(const char *path, const char *input, const char *postfix) {$/;"	f
+format_path_name	huffman-converter.h	/^    inline std::string format_path_name(const char *path, const char *input, const char *postfix) {$/;"	f	class:HuffmanConverter
 freq	huffman-converter.h	/^    unsigned freq;$/;"	m	struct:HuffmanNode
 freq	main.cpp	/^        int freq;$/;"	m	class:hufNode	file:
 getBitString	main.cpp	/^string getBitString(unsigned char c) {$/;"	f
 getFileSize	main.cpp	/^int getFileSize(ifstream &in) {$/;"	f
-get_file_size	huffman-converter.cpp	/^unsigned long long get_file_size(std::ifstream &is) {$/;"	f
+get_file_size	huffman-converter.cpp	/^unsigned get_file_size(const std::string& address) {$/;"	f
 hufNode	main.cpp	/^        hufNode() {}$/;"	f	class:hufNode
 hufNode	main.cpp	/^        hufNode(char s, int f) : symbol(s), freq(f) {$/;"	f	class:hufNode
 hufNode	main.cpp	/^        hufNode(const hufNode& hn) {$/;"	f	class:hufNode
@@ -51,16 +51,16 @@ invEncodeTable	huffman-converter.h	/^typedef std::map<unsigned char, std::string
 large_file	huffman-converter.cpp	/^const char *large_file = "large.txt";$/;"	v
 left	huffman-converter.h	/^    HuffmanNode *left;$/;"	m	struct:HuffmanNode
 left	main.cpp	/^        hufNode *left;$/;"	m	class:hufNode	file:
-loc_text	huffman-converter.h	/^const char *loc_text = "texts\/";$/;"	v
+loc_text	huffman-converter.h	/^    const char *loc_text = "texts\/";$/;"	m	class:HuffmanConverter
 main	huffman-converter.cpp	/^int main(int argc, const char *argv[]) {$/;"	f
 main	main.cpp	/^int main(int argc, char *argv[]) {$/;"	f
 medium_file	huffman-converter.cpp	/^const char *medium_file = "medium.txt";$/;"	v
 operator <	huffman-converter.cpp	/^bool operator< (const HuffmanNode &h1, const HuffmanNode &h2) {$/;"	f
 operator <	main.cpp	/^bool operator < (const hufNode &hc1, const hufNode &hc2) {$/;"	f
-path_encoded	huffman-converter.h	/^const char* path_encoded = ".\/encoded-files\/";$/;"	v
-path_freq	huffman-converter.h	/^const char* path_freq = ".\/frequency-table\/";$/;"	v
-postfix_huf	huffman-converter.h	/^const char *postfix_huf =".huf";$/;"	v
-postfix_tab	huffman-converter.h	/^const char *postfix_tab =".tab";$/;"	v
+path_encoded	huffman-converter.h	/^    const char* path_encoded = ".\/encoded-files\/";$/;"	m	class:HuffmanConverter
+path_freq	huffman-converter.h	/^    const char* path_freq = ".\/frequency-table\/";$/;"	m	class:HuffmanConverter
+postfix_huf	huffman-converter.h	/^    const char *postfix_huf =".huf";$/;"	m	class:HuffmanConverter
+postfix_tab	huffman-converter.h	/^    const char *postfix_tab =".tab";$/;"	m	class:HuffmanConverter
 priQ	huffman-converter.h	/^typedef std::priority_queue<HuffmanNode> priQ;$/;"	t
 print_compress_info	main.cpp	/^void print_compress_info(unsigned int cTotal, map<unsigned char, unsigned int> &ch_freq, unsigned int byteCount) {$/;"	f
 print_enocde_table	huffman-converter.cpp	/^void HuffmanConverter::print_enocde_table(std::ostream &out) {$/;"	f	class:HuffmanConverter
@@ -74,6 +74,7 @@ small_file	huffman-converter.cpp	/^const char *small_file = "small.txt";$/;"	v
 symbol	huffman-converter.h	/^    char symbol;$/;"	m	struct:HuffmanNode
 symbol	main.cpp	/^        char symbol;$/;"	m	class:hufNode	file:
 unzipFiles	main.cpp	/^void unzipFiles(string cfile) {$/;"	f
+very_large	huffman-converter.cpp	/^const char *very_large = "very-large.txt";$/;"	v
 what_to_process	main.cpp	/^void what_to_process(int argc, char *argv[]) {$/;"	f
 write_freq_table	huffman-encoder.cpp	/^void HuffmanConverter::write_freq_table(std::ofstream &inFile) {$/;"	f	class:HuffmanConverter
 write_to_binary	huffman-encoder.cpp	/^void HuffmanConverter::write_to_binary(std::ifstream& inFile, std::ofstream &outFile) {$/;"	f	class:HuffmanConverter

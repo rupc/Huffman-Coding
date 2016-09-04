@@ -62,10 +62,10 @@ void HuffmanConverter::write_to_binary(std::ifstream& inFile, std::ofstream &out
     
     // print remainder
     if (bit_buffer.size() > 0) {
-            std::bitset<64> bv(std::string(bit_buffer.begin(), bit_buffer.end()));
-            unsigned long long binary_form = bv.to_ullong();
-            outFile.write(reinterpret_cast<const char *>(&binary_form), sizeof(binary_form));
-            //std::cout << std::hex << binary_form << "\n";
+        std::bitset<64> bv(std::string(bit_buffer.begin(), bit_buffer.end()));
+        unsigned long long binary_form = bv.to_ullong();
+        outFile.write(reinterpret_cast<const char *>(&binary_form), sizeof(binary_form));
+        //std::cout << std::hex << binary_form << "\n";
     }
     // print remainder
     /*std::cout << bit_sequence << "\n";
@@ -77,11 +77,6 @@ void HuffmanConverter::write_freq_table(std::ofstream &inFile) {
     }
 }
 
-// just concat 3 strings of path, input, postfix
-
-inline std::string format_path_name(const char *path, const char *input, const char *postfix) {
-    return (std::string(path).append(input).append(postfix));
-}
 // wrapper function, ordering huffman basic functions
 void HuffmanConverter::encode_file(const char *input, const char *output = nullptr) {
     // get the pathes needed
@@ -94,7 +89,7 @@ void HuffmanConverter::encode_file(const char *input, const char *output = nullp
     std::ofstream outTable(tpath);
     std::ifstream afterFile;
     if (!inFile.is_open()) {
-        std::cerr << "File name:" << input << " doesn't exist." << std::endl;
+        std::cerr << "File name:" << input << " medium_file't exist." << std::endl;
         std::cerr << "Encoding fails!" << std::endl;
         return;
     }
@@ -108,7 +103,13 @@ void HuffmanConverter::encode_file(const char *input, const char *output = nullp
     inFile.clear();
     inFile.seekg(0, std::ios_base::beg);
     afterFile.open(opath, std::ios::in | std::ios::binary);
-
+    if (!afterFile.is_open()) {
+        std::cerr << "Cannot find encoded files" << std::endl;
+        std::cerr << "Encoding fails" << std::endl;
+        return;
+    }
+    afterFile.clear();
+    afterFile.seekg(0, std::ios_base::beg);
 
     /*printf("%-20s : %llu\n", "Original Size", total);
     printf("%-20s : %llu -> %lld\n", "Change Info", total, after);
@@ -117,16 +118,19 @@ void HuffmanConverter::encode_file(const char *input, const char *output = nullp
     printf("%-20s : %s\n", "File Name", input);
     printf("%-20s : %u\n", "Different Characters", (unsigned)fTab.size());
 
-    double zip_rate = compare_rate(inFile, afterFile);
-    printf("%-20s : %-4.4f%%\n", "Compress rate", zip_rate);
+    /*std::cout << ipath << "\n";
+    std::cout << opath << "\n";*/
     inFile.close();
     outFile.close();
     outTable.close();
     afterFile.close();
+    compare_rate(ipath, opath);
 }
-double HuffmanConverter::compare_rate(std::ifstream &before, std::ifstream &after) {
-    unsigned long long before_sz = get_file_size(before);
-    unsigned long long after_sz = get_file_size(after);
-    //std::cout << before_sz << " " << after_sz << "\n";
-    return ((double)after_sz/before_sz)*100.0;
+double HuffmanConverter::compare_rate(const std::string &before, const std::string &after) {
+    unsigned before_sz = get_file_size(before);
+    unsigned after_sz = get_file_size(after);
+    double zip_rate = ((double)after_sz/before_sz)*100.0;
+    printf("%-20s : %d -> %d\n","Size change", before_sz, after_sz);
+    printf("%-20s : %-4.4f%%\n", "Compress rate", zip_rate);
+    return  zip_rate;
 }
