@@ -21,9 +21,8 @@ typedef std::map<unsigned char, std::string> EncodeTable;
 typedef std::map<unsigned char, std::string> invEncodeTable;
 typedef std::priority_queue<HuffmanNode> priQ;
 typedef unsigned long long Bytes;
+unsigned long long get_file_size(const std::string& address);
 
-unsigned get_file_size(const std::string& address);
-unsigned long long get_file_size(std::ifstream &is);
 class HuffmanConverter {
 public:
     HuffmanConverter() {}
@@ -53,6 +52,7 @@ private:
     const char *loc_text = "texts/";
     const char* path_freq = "./frequency-table/";
     const char* path_encoded = "./encoded-files/";
+    const char* path_decoded = "./decoded-files/";
     const char *postfix_tab =".tab";
     const char *postfix_huf =".huf";
     FreqTable fTab;

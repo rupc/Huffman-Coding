@@ -68,8 +68,8 @@ void HuffmanConverter::write_to_binary(std::ifstream& inFile, std::ofstream &out
         //std::cout << std::hex << binary_form << "\n";
     }
     // print remainder
-    /*std::cout << bit_sequence << "\n";
-    std::cout << bit_buffer << "\n";*/
+    //std::cout << bit_sequence << "\n";
+    std::cout << bit_buffer << "\n";
 }
 void HuffmanConverter::write_freq_table(std::ofstream &inFile) {
     for (auto &p : fTab) {
@@ -130,7 +130,7 @@ double HuffmanConverter::compare_rate(const std::string &before, const std::stri
     unsigned before_sz = get_file_size(before);
     unsigned after_sz = get_file_size(after);
     double zip_rate = ((double)after_sz/before_sz)*100.0;
-    printf("%-20s : %d -> %d\n","Size change", before_sz, after_sz);
-    printf("%-20s : %-4.4f%%\n", "Compress rate", zip_rate);
+    printf("%-20s : %d -> %d\n","Size Change(bytes)", before_sz, after_sz);
+    printf("%-20s : %-4.4f%%\n", "Compression Rate", zip_rate);
     return  zip_rate;
 }

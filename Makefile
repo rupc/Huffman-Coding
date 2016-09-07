@@ -1,4 +1,4 @@
-TARGET=huffman-converter
+TARGET=bin/huffman-converter
 INCLUDE=.
 CXX=g++
 CXXFLAGS= -std=c++14 -O2

@@ -2,17 +2,21 @@
 #include <iostream>
 #include <fstream>
 
-const char *large_file = "large.txt";
-const char *very_large = "very-large.txt";
-const char *medium_file = "medium.txt";
-const char *small_file = "small.txt";
+#define NFILE 4
+const char *files[NFILE] = {"small.txt","medium.txt", "large.txt", "very-large.txt"};
 
 int main(int argc, const char *argv[]) {
     HuffmanConverter hConverter;
-    hConverter.encode_file(medium_file, nullptr);
+    if (argc == 1) {
+        //hConverter.encode_file(files[0], nullptr);
+        hConverter.decode_file(files[0], nullptr);
+    } else {
+        std::cout << "ya" << "\n";
+    }
+    hConverter.print_enocde_table(std::cout);
     return 0;
 }
-unsigned get_file_size(const std::string& address) {
+unsigned long long get_file_size(const std::string& address) {
   std::fstream motd(address.c_str(), std::ios::binary|std::ios::in|std::ios::ate);
   if(motd) {
     std::fstream::pos_type size = motd.tellg();
@@ -47,7 +51,11 @@ void HuffmanConverter::print_enocde_table(std::ostream &out) {
     out << "| Character Encode table |\n";
     out << "|------------------------|\n";
     for (const auto &p : eTab) {
-        printf("| %3d(%c) -> ", (unsigned)p.first, p.first);
+        if (p.first == 10) {
+            printf("| %3d(%s) -> ", (unsigned)p.first, "ws");
+        } else {
+            printf("| %3d(%c) -> ", (unsigned)p.first, p.first);
+        }
         for (const auto &q : p.second) {
             out << q;
         }
