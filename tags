@@ -59,6 +59,7 @@ main	main.cpp	/^int main(int argc, char *argv[]) {$/;"	f
 operator <	huffman-converter.cpp	/^bool operator< (const HuffmanNode &h1, const HuffmanNode &h2) {$/;"	f
 operator <	main.cpp	/^bool operator < (const hufNode &hc1, const hufNode &hc2) {$/;"	f
 parse_bitstr	huffman-decoder.cpp	/^std::string HuffmanConverter::parse_bitstr(std::string& bit_string) {$/;"	f	class:HuffmanConverter
+parse_freq_table	huffman-decoder.cpp	/^void HuffmanConverter::parse_freq_table(std::ifstream& tabFile) {$/;"	f	class:HuffmanConverter
 path_decoded	huffman-converter.h	/^    const char* path_decoded = ".\/decoded-files\/";$/;"	m	class:HuffmanConverter
 path_encoded	huffman-converter.h	/^    const char* path_encoded = ".\/encoded-files\/";$/;"	m	class:HuffmanConverter
 path_freq	huffman-converter.h	/^    const char* path_freq = ".\/frequency-table\/";$/;"	m	class:HuffmanConverter

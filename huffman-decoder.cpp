@@ -16,19 +16,26 @@ std::string HuffmanConverter::parse_bitstr(std::string& bit_string) {
     while(cnt != sz) {
         if(bit_string[cnt] == '1') {
             h_node = h_node->right;
-            //std::cout << "h_node->right> " << h_node->freq << std::endl;
         } else {
             h_node = h_node->left;
-            //std::cout << "h_node->left> " << h_node->freq << std::endl;
         }
         if(h_node->right == nullptr && h_node->left == nullptr) {
             result += h_node->symbol;
-            //std::cout << " >leaf node : " << h_node->symbol << std::endl;
             h_node = root;
         }
         ++cnt;
     }
     return result;
+}
+void HuffmanConverter::parse_freq_table(std::ifstream& tabFile) {
+    unsigned nOfChars, ch, cnt, last_pos;
+    tabFile >> nOfChars;
+    while (nOfChars--) {
+        tabFile >> ch >> cnt;
+        fTab[(unsigned char)ch] = cnt;
+    }
+    tabFile >> last_pos;
+    return last_pos;
 }
 void HuffmanConverter::decode_file(const char *inFile, const char *outFile) {
     // read from table and build frequency tree
