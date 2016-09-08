@@ -57,7 +57,7 @@ void HuffmanConverter::decode_file(const char *inFile, const char *outFile) {
     // Nessasary : .huf .tab
     std::string tpath = format_path_name(path_freq, inFile, postfix_tab); // table file's path
     std::string hpath = format_path_name(path_encoded, inFile, postfix_huf); // input file's path
-    std::string dpath = std::string(path_decoded).append(inFile); // input file's path
+    std::string dpath = std::string(path_decoded).append(inFile); // output file's path
     std::ifstream hufFile(hpath, std::ios::binary);
     std::ifstream tabFile(tpath);
     std::ofstream deFile(dpath);

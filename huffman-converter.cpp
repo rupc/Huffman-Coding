@@ -1,20 +1,51 @@
 #include "huffman-converter.h"
 #include <iostream>
 #include <fstream>
+#include <unistd.h>
 
 #define NFILE 4
 const char *files[NFILE] = {"small.txt","medium.txt", "large.txt", "very-large.txt"};
 
-int main(int argc, const char *argv[]) {
+void help();
+void version();
+int main(int argc, char *argv[]) {
     HuffmanConverter hConverter;
-    if (argc == 1) {
+    int opt;
+    while ((opt = getopt(argc, argv, "hve:d:")) != -1) {
+        switch (opt) {
+            case 'h':
+                help();
+                break;
+            case 'v':
+                version();
+                break;
+            case 'e':
+                std::cout << optarg << "\n";
+                break;
+            case 'd':
+                std::cout << optarg << "\n";
+                break;
+            default:
+               break; 
+        }
+    }
+    /*if (argc == 1) {
         //hConverter.encode_file(files[3], nullptr);
         hConverter.decode_file(files[3], nullptr);
     } else {
         std::cout << "ya" << "\n";
-    }
+    }*/
     //hConverter.print_enocde_table(std::cout);
     return 0;
+}
+void help() {
+    printf("Encode option : -e [file-path]\nexample) ./huffman-converter -e texts/large.txt\n");
+    printf("Decode option : -d [file-path]\nexample) ./huffman-converter -e texts/large.txt\n");
+    exit(0);
+}
+void version() {
+    printf("Huffman Converter\nVersion : 1.0\n");
+    exit(0);
 }
 unsigned long long get_file_size(const std::string& address) {
   std::fstream motd(address.c_str(), std::ios::binary|std::ios::in|std::ios::ate);

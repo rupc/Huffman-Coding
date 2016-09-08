@@ -20,7 +20,7 @@ HuffmanNode	huffman-converter.cpp	/^HuffmanNode::HuffmanNode(int f, HuffmanNode 
 HuffmanNode	huffman-converter.cpp	/^HuffmanNode::HuffmanNode(unsigned char c, unsigned f)$/;"	f	class:HuffmanNode
 HuffmanNode	huffman-converter.h	/^struct HuffmanNode {$/;"	s
 INCLUDE	Makefile	/^INCLUDE=.$/;"	m
-NFILE	huffman-converter.cpp	5;"	d	file:
+NFILE	huffman-converter.cpp	6;"	d	file:
 OBJ	Makefile	/^OBJ=huffman-converter.o huffman-decoder.o huffman-encoder.o$/;"	m
 PrintSymbolEncoding	main.cpp	/^int PrintSymbolEncoding(map<unsigned char, string> &ch_str) {$/;"	f
 SRC	Makefile	/^SRC=$(OBJ:.o=.cpp)$/;"	m
@@ -44,6 +44,7 @@ getBitString	main.cpp	/^string getBitString(unsigned char c) {$/;"	f
 getFileSize	main.cpp	/^int getFileSize(ifstream &in) {$/;"	f
 get_bit_string	huffman-decoder.cpp	/^std::string get_bit_string(unsigned char c) {$/;"	f
 get_file_size	huffman-converter.cpp	/^unsigned long long get_file_size(const std::string& address) {$/;"	f
+help	huffman-converter.cpp	/^void help() {$/;"	f
 hufNode	main.cpp	/^        hufNode() {}$/;"	f	class:hufNode
 hufNode	main.cpp	/^        hufNode(char s, int f) : symbol(s), freq(f) {$/;"	f	class:hufNode
 hufNode	main.cpp	/^        hufNode(const hufNode& hn) {$/;"	f	class:hufNode
@@ -55,7 +56,7 @@ invEncodeTable	huffman-converter.h	/^typedef std::map<unsigned char, std::string
 left	huffman-converter.h	/^    HuffmanNode *left;$/;"	m	struct:HuffmanNode
 left	main.cpp	/^        hufNode *left;$/;"	m	class:hufNode	file:
 loc_text	huffman-converter.h	/^    const char *loc_text = "texts\/";$/;"	m	class:HuffmanConverter
-main	huffman-converter.cpp	/^int main(int argc, const char *argv[]) {$/;"	f
+main	huffman-converter.cpp	/^int main(int argc, char *argv[]) {$/;"	f
 main	main.cpp	/^int main(int argc, char *argv[]) {$/;"	f
 operator <	huffman-converter.cpp	/^bool operator< (const HuffmanNode &h1, const HuffmanNode &h2) {$/;"	f
 operator <	main.cpp	/^bool operator < (const hufNode &hc1, const hufNode &hc2) {$/;"	f
@@ -78,6 +79,7 @@ root	main.cpp	/^hufNode root;$/;"	v
 symbol	huffman-converter.h	/^    char symbol;$/;"	m	struct:HuffmanNode
 symbol	main.cpp	/^        char symbol;$/;"	m	class:hufNode	file:
 unzipFiles	main.cpp	/^void unzipFiles(string cfile) {$/;"	f
+version	huffman-converter.cpp	/^void version() {$/;"	f
 what_to_process	main.cpp	/^void what_to_process(int argc, char *argv[]) {$/;"	f
 write_freq_table	huffman-encoder.cpp	/^void HuffmanConverter::write_freq_table(std::ofstream &inFile, unsigned last_pos) {$/;"	f	class:HuffmanConverter
 write_to_binary	huffman-encoder.cpp	/^unsigned HuffmanConverter::write_to_binary(std::ifstream& inFile, std::ofstream &outFile) {$/;"	f	class:HuffmanConverter
