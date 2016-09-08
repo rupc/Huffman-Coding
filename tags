@@ -36,7 +36,7 @@ encode_file	huffman-encoder.cpp	/^void HuffmanConverter::encode_file(const char 
 encode_symbol	huffman-encoder.cpp	/^void HuffmanConverter::encode_symbol() {$/;"	f	class:HuffmanConverter
 encode_symbol_util	huffman-encoder.cpp	/^void HuffmanConverter::encode_symbol_util(HuffmanNode *node, EncodeTable &eTab, std::string encStr) {$/;"	f	class:HuffmanConverter
 fTab	huffman-converter.h	/^    FreqTable fTab;$/;"	m	class:HuffmanConverter
-files	huffman-converter.cpp	/^const char *files[NFILE] = {"small.txt","medium.txt", "large.txt", "very-large.txt"};$/;"	v
+files	huffman-converter.cpp	/^const char *files[NFILE] = {"small.txt","medium.txt", "large.txt", "very-large.txt", "hangul.txt"};$/;"	v
 format_path_name	huffman-converter.h	/^    inline std::string format_path_name(const char *path, const char *input, const char *postfix) {$/;"	f	class:HuffmanConverter
 freq	huffman-converter.h	/^    unsigned freq;$/;"	m	struct:HuffmanNode
 freq	main.cpp	/^        int freq;$/;"	m	class:hufNode	file:

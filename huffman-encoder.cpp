@@ -86,8 +86,8 @@ void HuffmanConverter::write_freq_table(std::ofstream &inFile, unsigned last_pos
 // wrapper function, ordering huffman basic functions
 void HuffmanConverter::encode_file(const char *input, const char *output = nullptr) {
     // get the pathes needed
-    //std::string ipath = std::string(loc_text) + input; // input file's path
-    std::string ipath = input; // input file's path
+    std::string ipath = std::string(loc_text) + input; // input file's path
+    //std::string ipath = input; // input file's path
     std::string opath = format_path_name(path_encoded, input, postfix_huf); // output file's path
     std::string tpath = format_path_name(path_freq, input, postfix_tab); // table file's path
 
@@ -96,7 +96,7 @@ void HuffmanConverter::encode_file(const char *input, const char *output = nullp
     std::ofstream outTable(tpath);
     std::ifstream afterFile;
     if (!inFile.is_open()) {
-        std::cerr << "File name:" << input << " medium_file't exist." << std::endl;
+        std::cerr << "File name:" << input << " doesn't exist." << std::endl;
         std::cerr << "Encoding fails!" << std::endl;
         return;
     }
