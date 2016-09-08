@@ -13,7 +13,7 @@ int main(int argc, const char *argv[]) {
     } else {
         std::cout << "ya" << "\n";
     }
-    hConverter.print_enocde_table(std::cout);
+    //hConverter.print_enocde_table(std::cout);
     return 0;
 }
 unsigned long long get_file_size(const std::string& address) {

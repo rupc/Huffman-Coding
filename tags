@@ -59,7 +59,7 @@ main	main.cpp	/^int main(int argc, char *argv[]) {$/;"	f
 operator <	huffman-converter.cpp	/^bool operator< (const HuffmanNode &h1, const HuffmanNode &h2) {$/;"	f
 operator <	main.cpp	/^bool operator < (const hufNode &hc1, const hufNode &hc2) {$/;"	f
 parse_bitstr	huffman-decoder.cpp	/^std::string HuffmanConverter::parse_bitstr(std::string& bit_string) {$/;"	f	class:HuffmanConverter
-parse_freq_table	huffman-decoder.cpp	/^void HuffmanConverter::parse_freq_table(std::ifstream& tabFile) {$/;"	f	class:HuffmanConverter
+parse_freq_table	huffman-decoder.cpp	/^unsigned HuffmanConverter::parse_freq_table(std::ifstream& tabFile) {$/;"	f	class:HuffmanConverter
 path_decoded	huffman-converter.h	/^    const char* path_decoded = ".\/decoded-files\/";$/;"	m	class:HuffmanConverter
 path_encoded	huffman-converter.h	/^    const char* path_encoded = ".\/encoded-files\/";$/;"	m	class:HuffmanConverter
 path_freq	huffman-converter.h	/^    const char* path_freq = ".\/frequency-table\/";$/;"	m	class:HuffmanConverter
@@ -78,7 +78,7 @@ symbol	huffman-converter.h	/^    char symbol;$/;"	m	struct:HuffmanNode
 symbol	main.cpp	/^        char symbol;$/;"	m	class:hufNode	file:
 unzipFiles	main.cpp	/^void unzipFiles(string cfile) {$/;"	f
 what_to_process	main.cpp	/^void what_to_process(int argc, char *argv[]) {$/;"	f
-write_freq_table	huffman-encoder.cpp	/^void HuffmanConverter::write_freq_table(std::ofstream &inFile) {$/;"	f	class:HuffmanConverter
-write_to_binary	huffman-encoder.cpp	/^void HuffmanConverter::write_to_binary(std::ifstream& inFile, std::ofstream &outFile) {$/;"	f	class:HuffmanConverter
+write_freq_table	huffman-encoder.cpp	/^void HuffmanConverter::write_freq_table(std::ofstream &inFile, unsigned last_pos) {$/;"	f	class:HuffmanConverter
+write_to_binary	huffman-encoder.cpp	/^unsigned HuffmanConverter::write_to_binary(std::ifstream& inFile, std::ofstream &outFile) {$/;"	f	class:HuffmanConverter
 zipFiles	main.cpp	/^void zipFiles(string rawfile, const int &headLineno, const int &byteCount) {$/;"	f
 ~HuffmanConverter	huffman-converter.h	/^    ~HuffmanConverter() {}$/;"	f	class:HuffmanConverter

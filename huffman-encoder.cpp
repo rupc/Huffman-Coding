@@ -38,7 +38,7 @@ void HuffmanConverter::encode_symbol_util(HuffmanNode *node, EncodeTable &eTab, 
     }
 }
 
-void HuffmanConverter::write_to_binary(std::ifstream& inFile, std::ofstream &outFile) {
+unsigned HuffmanConverter::write_to_binary(std::ifstream& inFile, std::ofstream &outFile) {
     inFile.clear();
     inFile.seekg(0, std::ios::beg);
 
@@ -73,11 +73,14 @@ void HuffmanConverter::write_to_binary(std::ifstream& inFile, std::ofstream &out
     // print remainder
     //std::cout << bit_sequence << "\n";
     //std::cout << bit_buffer << "\n";
+    return bit_buffer.size();
 }
-void HuffmanConverter::write_freq_table(std::ofstream &inFile) {
+void HuffmanConverter::write_freq_table(std::ofstream &inFile, unsigned last_pos) {
+    inFile << fTab.size() << "\n";
     for (auto &p : fTab) {
         inFile << (unsigned)p.first << " " << p.second << "\n";
     }
+    inFile << last_pos;
 }
 
 // wrapper function, ordering huffman basic functions
@@ -100,8 +103,8 @@ void HuffmanConverter::encode_file(const char *input, const char *output = nullp
     build_freq_table(inFile);
     build_prefix_tree();
     encode_symbol();
-    write_to_binary(inFile, outFile);
-    write_freq_table(outTable);
+    unsigned last_pos = write_to_binary(inFile, outFile);
+    write_freq_table(outTable, last_pos);
 
     inFile.clear();
     inFile.seekg(0, std::ios_base::beg);

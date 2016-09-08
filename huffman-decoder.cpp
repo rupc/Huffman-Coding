@@ -27,7 +27,7 @@ std::string HuffmanConverter::parse_bitstr(std::string& bit_string) {
     }
     return result;
 }
-void HuffmanConverter::parse_freq_table(std::ifstream& tabFile) {
+unsigned HuffmanConverter::parse_freq_table(std::ifstream& tabFile) {
     unsigned nOfChars, ch, cnt, last_pos;
     tabFile >> nOfChars;
     while (nOfChars--) {
@@ -64,12 +64,8 @@ void HuffmanConverter::decode_file(const char *inFile, const char *outFile) {
     // empty 
     fTab.clear();
     eTab.clear();
-    unsigned ch;
-    unsigned cnt = 0;
-    while (tabFile >> ch >> cnt) {
-        std::cout << ch << " " << cnt << "\n";
-        fTab[(unsigned char)ch] = cnt;
-    }
+    unsigned last_pos = parse_freq_table(tabFile);
+
     build_prefix_tree();
     encode_symbol();
     // read all binaries into memory
@@ -85,6 +81,9 @@ void HuffmanConverter::decode_file(const char *inFile, const char *outFile) {
         x |= buf[i];
         bit_string += get_bit_string(buf[i]);
         x = 0x0;
+    }
+    for (int i = 0; i < 8-last_pos; i++) {
+        bit_string.pop_back();
     }
     std::cout << "bit_string >" << bit_string << std::endl;
     std::cout << bit_string.size() << "\n";
