@@ -37,6 +37,18 @@ unsigned HuffmanConverter::parse_freq_table(std::ifstream& tabFile) {
     tabFile >> last_pos;
     return last_pos;
 }
+// fill bit string from binary buffer
+void HuffmanConverter:: build_bit_string(char *buf, unsigned bSize, std::string &bit_string, unsigned last_pos) {
+    unsigned char x = 0;
+    for(int i = 0 ; i < bSize ; ++i) {
+        x |= buf[i];
+        bit_string += get_bit_string(buf[i]);
+        x = 0x0;
+    }
+    for (int i = 0; i < 8-last_pos; i++) {
+        bit_string.pop_back();
+    }
+}
 void HuffmanConverter::decode_file(const char *inFile, const char *outFile) {
     // read from table and build frequency tree
     // build prefix tree
@@ -70,26 +82,14 @@ void HuffmanConverter::decode_file(const char *inFile, const char *outFile) {
     encode_symbol();
     // read all binaries into memory
     unsigned long long bin_sz = get_file_size(hpath);
-    //std::cout << bin_sz << "\n";
     char *buf = new char[bin_sz];
     hufFile.read(buf, bin_sz);
 
-    unsigned char x = 0;
     std::string bit_string = "";
-
-    for(int i = 0 ; i < bin_sz ; ++i) {
-        x |= buf[i];
-        bit_string += get_bit_string(buf[i]);
-        x = 0x0;
-    }
-    for (int i = 0; i < 8-last_pos; i++) {
-        bit_string.pop_back();
-    }
-    std::cout << "bit_string >" << bit_string << std::endl;
-    std::cout << bit_string.size() << "\n";
-
-    std::cout << "\n";
-    std::cout << parse_bitstr(bit_string);
-    std::cout << "\n";
+    build_bit_string(buf, bin_sz, bit_string, last_pos);
+    //std::cout << parse_bitstr(bit_string);
+    deFile << parse_bitstr(bit_string);
+    tabFile.close();
     hufFile.close();
 }
+

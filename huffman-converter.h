@@ -39,6 +39,7 @@ private:
     void write_freq_table(std::ofstream&, unsigned);
     std::string parse_bitstr(std::string&);
     unsigned parse_freq_table(std::ifstream&);
+    void build_bit_string(char *, unsigned, std::string &, unsigned);
 public:
     void encode_file(const char *, const char *);
     void decode_file(const char *, const char *);

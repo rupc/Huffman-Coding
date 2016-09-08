@@ -4,3 +4,4 @@
 *.a
 tags
 main.cpp
+bin
