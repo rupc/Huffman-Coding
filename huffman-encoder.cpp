@@ -44,32 +44,35 @@ void HuffmanConverter::write_to_binary(std::ifstream& inFile, std::ofstream &out
 
     std::string bit_sequence = "";
     std::string bit_buffer = ""; 
-    bit_sequence.reserve(64);
-    bit_buffer.reserve(64);
+    bit_sequence.reserve(8);
+    bit_buffer.reserve(8);
     unsigned char ch; 
     while(inFile >> std::noskipws >> ch) {
-        //bit_sequence += "." + eTab[ch];
+        bit_sequence += "." + eTab[ch];
         bit_buffer += eTab[ch];
-        // assumes each encoded string is less than 64
-        if (bit_buffer.size() >= 64) {
-            std::bitset<64> bv(std::string(bit_buffer.begin(), bit_buffer.begin()+64));
-            bit_buffer = std::string(bit_buffer.begin()+64, bit_buffer.end());
-            unsigned long long binary_form = bv.to_ullong();
+        // assumes each encoded string is less than 8
+        if (bit_buffer.size() >= 8) {
+            std::bitset<8> bv(std::string(bit_buffer.begin(), bit_buffer.begin()+8));
+            bit_buffer = std::string(bit_buffer.begin()+8, bit_buffer.end());
+            unsigned char binary_form = (unsigned char)bv.to_ulong();
             outFile.write(reinterpret_cast<const char *>(&binary_form), sizeof(binary_form));
             //std::cout << std::hex << binary_form << "\n";
         }
     }
-    
+    std::cout << "bitsize:"<<bit_buffer.size() << "\n";
     // print remainder
     if (bit_buffer.size() > 0) {
-        std::bitset<64> bv(std::string(bit_buffer.begin(), bit_buffer.end()));
-        unsigned long long binary_form = bv.to_ullong();
+        std::bitset<8> bv(std::string(bit_buffer.begin(), bit_buffer.end()));
+        unsigned char binary_form = (unsigned char)bv.to_ulong();
+        for (int i = 0; i < 8-bit_buffer.size(); i++) {
+            binary_form = binary_form << 1;
+        }
         outFile.write(reinterpret_cast<const char *>(&binary_form), sizeof(binary_form));
         //std::cout << std::hex << binary_form << "\n";
     }
     // print remainder
     //std::cout << bit_sequence << "\n";
-    std::cout << bit_buffer << "\n";
+    //std::cout << bit_buffer << "\n";
 }
 void HuffmanConverter::write_freq_table(std::ofstream &inFile) {
     for (auto &p : fTab) {
@@ -129,8 +132,8 @@ void HuffmanConverter::encode_file(const char *input, const char *output = nullp
 double HuffmanConverter::compare_rate(const std::string &before, const std::string &after) {
     unsigned before_sz = get_file_size(before);
     unsigned after_sz = get_file_size(after);
-    double zip_rate = ((double)after_sz/before_sz)*100.0;
+    double zip_rate = 100.0 - ((double)after_sz/before_sz)*100.0;
     printf("%-20s : %d -> %d\n","Size Change(bytes)", before_sz, after_sz);
-    printf("%-20s : %-4.4f%%\n", "Compression Rate", zip_rate);
+    printf("%-20s : %-4.2f%%\n", "Compression Rate", zip_rate);
     return  zip_rate;
 }

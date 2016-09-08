@@ -8,8 +8,8 @@ const char *files[NFILE] = {"small.txt","medium.txt", "large.txt", "very-large.t
 int main(int argc, const char *argv[]) {
     HuffmanConverter hConverter;
     if (argc == 1) {
-        //hConverter.encode_file(files[0], nullptr);
-        hConverter.decode_file(files[0], nullptr);
+        hConverter.encode_file(files[1], nullptr);
+        //hConverter.decode_file(files[0], nullptr);
     } else {
         std::cout << "ya" << "\n";
     }
