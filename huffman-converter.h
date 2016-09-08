@@ -36,7 +36,8 @@ private:
     void encode_symbol();
     void encode_symbol_util(HuffmanNode *, EncodeTable &, std::string);
     void write_to_binary(std::ifstream&, std::ofstream &);
-    void write_freq_table(std::ofstream &);
+    void write_freq_table(std::ofstream&);
+    std::string parse_bitstr(std::string&);
 public:
     void encode_file(const char *, const char *);
     void decode_file(const char *, const char *);

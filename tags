@@ -39,9 +39,9 @@ files	huffman-converter.cpp	/^const char *files[NFILE] = {"small.txt","medium.tx
 format_path_name	huffman-converter.h	/^    inline std::string format_path_name(const char *path, const char *input, const char *postfix) {$/;"	f	class:HuffmanConverter
 freq	huffman-converter.h	/^    unsigned freq;$/;"	m	struct:HuffmanNode
 freq	main.cpp	/^        int freq;$/;"	m	class:hufNode	file:
-getBitString	huffman-decoder.cpp	/^std::string getBitString(unsigned char c) {$/;"	f
 getBitString	main.cpp	/^string getBitString(unsigned char c) {$/;"	f
 getFileSize	main.cpp	/^int getFileSize(ifstream &in) {$/;"	f
+get_bit_string	huffman-decoder.cpp	/^std::string get_bit_string(unsigned char c) {$/;"	f
 get_file_size	huffman-converter.cpp	/^unsigned long long get_file_size(const std::string& address) {$/;"	f
 hufNode	main.cpp	/^        hufNode() {}$/;"	f	class:hufNode
 hufNode	main.cpp	/^        hufNode(char s, int f) : symbol(s), freq(f) {$/;"	f	class:hufNode
@@ -58,6 +58,7 @@ main	huffman-converter.cpp	/^int main(int argc, const char *argv[]) {$/;"	f
 main	main.cpp	/^int main(int argc, char *argv[]) {$/;"	f
 operator <	huffman-converter.cpp	/^bool operator< (const HuffmanNode &h1, const HuffmanNode &h2) {$/;"	f
 operator <	main.cpp	/^bool operator < (const hufNode &hc1, const hufNode &hc2) {$/;"	f
+parse_bitstr	huffman-decoder.cpp	/^std::string HuffmanConverter::parse_bitstr(std::string& bit_string) {$/;"	f	class:HuffmanConverter
 path_decoded	huffman-converter.h	/^    const char* path_decoded = ".\/decoded-files\/";$/;"	m	class:HuffmanConverter
 path_encoded	huffman-converter.h	/^    const char* path_encoded = ".\/encoded-files\/";$/;"	m	class:HuffmanConverter
 path_freq	huffman-converter.h	/^    const char* path_freq = ".\/frequency-table\/";$/;"	m	class:HuffmanConverter
