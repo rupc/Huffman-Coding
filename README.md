@@ -1,5 +1,8 @@
 # What is Huffman Encoding?
-Huffman encoding is an algorithm which outputs compressed data from input file(usually ascii format). By using greedy approach, it encodes the most ouccuring character as shortest one in binary format. And the next most occuring character as the second shortest one and so on. This technique is alos based on binary tree, priority queue.
+Huffman encoding is an algorithm which outputs compressed data from input file(usually ascii format). By using greedy approach, it encodes the most ouccuring character as shortest one in binary format. And the next most occuring character as the second shortest one and so on. This technique is also based on binary tree, priority queue.
+
+This program can encode and decode given file. So this is not just encoder, but also decoder, which then it is called by converter.
+
 
 ---
 
