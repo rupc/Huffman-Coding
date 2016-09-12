@@ -55,6 +55,11 @@ void HuffmanConverter::decode_file(const char *inFile, const char *outFile) {
     // read .huf file and get bit string during reaching to leaf node of prefix tree
     // At each bit string, map it to one character in inverted encode table
     // Nessasary : .huf .tab
+    if (inFile == nullptr) {
+        std::cerr << "Input file name is missing!\n";
+        return;
+    }
+    
     std::string tpath = format_path_name(path_freq, inFile, postfix_tab); // table file's path
     std::string hpath = format_path_name(path_encoded, inFile, postfix_huf); // input file's path
     std::string dpath = std::string(path_decoded).append(inFile); // output file's path
@@ -72,7 +77,6 @@ void HuffmanConverter::decode_file(const char *inFile, const char *outFile) {
         std::cerr << "target file doesn't exist" << std::endl;
         return;
     }
-
     // empty 
     fTab.clear();
     eTab.clear();
@@ -81,15 +85,25 @@ void HuffmanConverter::decode_file(const char *inFile, const char *outFile) {
     build_prefix_tree();
     encode_symbol();
     // read all binaries into memory
-    unsigned long long bin_sz = get_file_size(hpath);
-    char *buf = new char[bin_sz];
-    hufFile.read(buf, bin_sz);
+    unsigned long long before_sz = get_file_size(hpath);
+    char *buf = new char[before_sz];
+    hufFile.read(buf, before_sz);
 
     std::string bit_string = "";
-    build_bit_string(buf, bin_sz, bit_string, last_pos);
+    build_bit_string(buf, before_sz, bit_string, last_pos);
     //std::cout << parse_bitstr(bit_string);
     deFile << parse_bitstr(bit_string);
+    unsigned long long after_sz = get_file_size(dpath);
     tabFile.close();
     hufFile.close();
+
+    printf("%-20s : %s\n", "File Name", inFile);
+    printf("%-20s : %llu\n", "File Size", before_sz);
+    printf("%-20s : %s\n", "Table Name", tpath.c_str());
+    printf("%-20s : %s\n", "Decoded Location", path_decoded);
+    printf("%-20s : %llu -> %llu\n","Size Change(bytes)", before_sz, after_sz);
+    
+    double unzip_rate = 100.0 + ((double)after_sz/before_sz)*100.0;
+    printf("%-20s : %-4.2f%%\n","Decompression Rate", unzip_rate);
 }
 

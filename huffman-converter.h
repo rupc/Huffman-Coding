@@ -53,9 +53,9 @@ public:
     void print_enocde_table(std::ostream &);
 private:
     const char *loc_text = "texts/";
-    const char* path_freq = "./frequency-table/";
-    const char* path_encoded = "./encoded-files/";
-    const char* path_decoded = "./decoded-files/";
+    const char *path_freq = "./frequency-table/";
+    const char *path_encoded = "./encoded-files/";
+    const char *path_decoded = "./decoded-files/";
     const char *postfix_tab =".tab";
     const char *postfix_huf =".huf";
     FreqTable fTab;

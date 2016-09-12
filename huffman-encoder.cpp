@@ -59,7 +59,7 @@ unsigned HuffmanConverter::write_to_binary(std::ifstream& inFile, std::ofstream 
             //std::cout << std::hex << binary_form << "\n";
         }
     }
-    std::cout << "bitsize:"<<bit_buffer.size() << "\n";
+    //std::cout << "bitsize:"<<bit_buffer.size() << "\n";
     // print remainder
     if (bit_buffer.size() > 0) {
         std::bitset<8> bv(std::string(bit_buffer.begin(), bit_buffer.end()));
@@ -85,6 +85,10 @@ void HuffmanConverter::write_freq_table(std::ofstream &inFile, unsigned last_pos
 
 // wrapper function, ordering huffman basic functions
 void HuffmanConverter::encode_file(const char *input, const char *output = nullptr) {
+    if (input == nullptr) {
+        std::cerr << "Input file is missing!\n";
+        return;
+    }
     // get the pathes needed
     std::string ipath = std::string(loc_text) + input; // input file's path
     //std::string ipath = input; // input file's path
@@ -96,7 +100,7 @@ void HuffmanConverter::encode_file(const char *input, const char *output = nullp
     std::ofstream outTable(tpath);
     std::ifstream afterFile;
     if (!inFile.is_open()) {
-        std::cerr << "File name:" << input << " doesn't exist." << std::endl;
+        std::cerr << "File name : " << input << " doesn't exist." << std::endl;
         std::cerr << "Encoding fails!" << std::endl;
         return;
     }
@@ -109,14 +113,14 @@ void HuffmanConverter::encode_file(const char *input, const char *output = nullp
 
     inFile.clear();
     inFile.seekg(0, std::ios_base::beg);
-    afterFile.open(opath, std::ios::in | std::ios::binary);
+    /*afterFile.open(opath, std::ios::in | std::ios::binary);
     if (!afterFile.is_open()) {
         std::cerr << "Cannot find encoded files" << std::endl;
         std::cerr << "Encoding fails" << std::endl;
         return;
     }
     afterFile.clear();
-    afterFile.seekg(0, std::ios_base::beg);
+    afterFile.seekg(0, std::ios_base::beg);*/
 
     /*printf("%-20s : %llu\n", "Original Size", total);
     printf("%-20s : %llu -> %lld\n", "Change Info", total, after);
@@ -130,7 +134,7 @@ void HuffmanConverter::encode_file(const char *input, const char *output = nullp
     inFile.close();
     outFile.close();
     outTable.close();
-    afterFile.close();
+    //afterFile.close();
     compare_rate(ipath, opath);
 }
 double HuffmanConverter::compare_rate(const std::string &before, const std::string &after) {
