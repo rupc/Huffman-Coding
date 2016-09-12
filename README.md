@@ -7,16 +7,17 @@ Huffman encoding is an algorithm which outputs compressed data from input file(u
 ## How to use?
 ### Encoding
 The original files to be encoded should be in texts folder. and then,  
-> ./huffman-converter -e [file-name]
+> ./huffman-converter -e [file-name]   
+
 Encoding process generates 2 files: the encoded file, table file. Each has its location at encoded-files and frequency folder. 
 
 #### Table
 Table information is important for decoding process. Table file has ".tab" as its extension. And It consists of three part.
-> N(Number of different characters)
-> Pairs of Character Frequency 
-> ....
-> ....
-> K(Last ending Position)
+> N(Number of different characters)     
+> Pairs of Character Frequency   
+> ....   
+> ....   
+> K(Last ending Position)   
 
 I want to mention that why K is needed. Huffman encoding actually encodes characters byte by byte as binary. But, the last byte might not be fully filled. So if you want to decode the compressed binary file, you have to know which bit in last byte end.
 
@@ -27,10 +28,10 @@ you can use like that.
 
 ### Etc
 you can see also the version of program and help information as follow commnad.
-> ./huffman-converter -v
-> ./huffman-converter -h
+> ./huffman-converter -v   
+> ./huffman-converter -h    
 
 ## Blah Blah
-**I know that It's inconvinient that the files should be at the specified location. But, you know, This is open source. You can modify and redistribute this as much as you like. **(~~I actually consider this on later~~)
-
+**I know that It's inconvinient that the files should be at the predefined location. But, you know, This is open source. You can modify and redistribute this as much as you like. **(~~I actually consider this on later~~)
+  
 This is the improved version of my old program, which was written at my junior class assigment. Back then, I had removed Line feed character for mistake because it wasn't show up when I print it. I thought it was buggy. Now I understand why it was not. Just looking into the ascii table and printing it as a number is enough.
