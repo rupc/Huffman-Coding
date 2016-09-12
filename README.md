@@ -1,8 +1,7 @@
 # What is Huffman Encoding?
-Huffman encoding is an algorithm which outputs compressed data from input file(usually ascii format). By using greedy approach, it encodes most ouccuring character as shortest one in binary format. This technique is based on binary tree, priority queue.
+Huffman encoding is an algorithm which outputs compressed data from input file(usually ascii format). By using greedy approach, it encodes the most ouccuring character as shortest one in binary format. And the next most occuring character as the second shortest one and so on. This technique is alos based on binary tree, priority queue.
 
 ---
-
 
 ## Encoding
 The original files to be encoded should be in texts folder. and then,  
@@ -16,9 +15,9 @@ Table information is important for decoding process. Table file has ".tab" as it
 > Pairs of Character Frequency   
 > ....   
 > ....   
-> K(Last ending Position)   
+> K(Last ending position)   
 
-I want to mention that why K is needed. Huffman encoding actually encodes characters byte by byte as binary. But, the last byte might not be fully needed. So if you want to decode the compressed binary file, you have to know which bit in last byte ends.
+I want to mention that why K is needed. Huffman encoding actually encodes characters byte by byte as binary. But, the last byte might not be fully needed. So if you want to decode the compressed binary file, you have to know where the ending bit is.
 
 ## Decoding
 Decoding process needs 2 files as input: .huf, .tab    
