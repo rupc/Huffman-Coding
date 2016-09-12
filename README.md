@@ -31,4 +31,6 @@ you can see also the version of program and help information as follow commnad.
 > ./huffman-converter -h
 
 ## Blah Blah
+**I know that It's inconvinient that the files should be at the specified location. But, you know, This is open source. You can modify and redistribute this as much as you like. **(~~I actually consider this on later~~)
+
 This is the improved version of my old program, which was written at my junior class assigment. Back then, I had removed Line feed character for mistake because it wasn't show up when I print it. I thought it was buggy. Now I understand why it was not. Just looking into the ascii table and printing it as a number is enough.
