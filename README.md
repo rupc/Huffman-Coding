@@ -6,6 +6,10 @@ This program can encode and decode given file. So this is not just encoder, but 
 
 ---
 
+## Compile
+After cloning this repository, enter 'make' command in your shell
+> make
+
 ## Encoding
 The original files to be encoded should be in texts folder. and then,  
 > ./huffman-converter -e [file-name]   
