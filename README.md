@@ -38,5 +38,3 @@ you can see also the version of program and help information as follow commnad.
 
 ## Blah Blah
 For comparing original file with encoded file, I fixed the location of input file in texts folder
-
-~~This is the improved version of my old program, which was written at my junior class assigment. Back then, I had removed Line feed character for mistake because it wasn't show up when I print it. I thought it was buggy. Now I understand why it was not. Just looking into the ascii table and printing it as a number is enough.~~
